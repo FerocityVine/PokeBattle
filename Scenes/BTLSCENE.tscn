@@ -1,0 +1,593 @@
+[gd_scene load_steps=26 format=2]
+
+[ext_resource path="res://Assets/FRAME.png" type="Texture" id=1]
+[ext_resource path="res://Assets/HUDTEXT.png" type="Texture" id=2]
+[ext_resource path="res://Assets/PokeFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Assets/POKEFRNT.png" type="Texture" id=4]
+[ext_resource path="res://Assets/POKEBACK.png" type="Texture" id=5]
+[ext_resource path="res://Assets/TRAINER.png" type="Texture" id=6]
+[ext_resource path="res://Scripts/BTLSCENE.cs" type="Script" id=7]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 4, 4, 28, 28 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 4, 28, 28 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 4, 128, 28, 28 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 128, 28, 28 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 8, 32, 24 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 128, 32, 24 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 8, 64, 24, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 64, 24, 32 )
+
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 172, 97, 308, 63 )
+
+[sub_resource type="AtlasTexture" id=16]
+atlas = ExtResource( 2 )
+region = Rect2( 172, 4, 44, 16 )
+
+[sub_resource type="AtlasTexture" id=17]
+atlas = ExtResource( 2 )
+region = Rect2( 440, 4, 24, 20 )
+
+[sub_resource type="AtlasTexture" id=18]
+atlas = ExtResource( 2 )
+region = Rect2( 228, 4, 200, 16 )
+
+[sub_resource type="AtlasTexture" id=15]
+atlas = ExtResource( 2 )
+region = Rect2( 228, 22, 200, 16 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "BTLINIT"
+length = 2.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/TRAINER/ENEMY:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 992, 280 ), Vector2( 704, 280 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../MAIN/TRAINER/PLAYER:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 48, 400 ), Vector2( 336, 400 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../MAIN/TRAINER:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ Color( 0.215686, 0.215686, 0.215686, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../MAIN/BGRECT/INFOBOX/TEXT:text")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "$% TRAINER wants to battle." ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../MAIN/BGRECT/INFOBOX/TEXT:visible_characters")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 1, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 27 ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "ESEND"
+length = 2.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/BGRECT/INFOBOX/TEXT:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ "", "$% TRAINER sent out MISSINGNO.!" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../MAIN/POKEMON/ENEMY:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1e-05, 1e-05 ), Vector2( 4, 4 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../MAIN/BARS/ENEMY:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "ESLIDE"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/TRAINER/ENEMY:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 704, 280 ), Vector2( 936, 280 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../MAIN/BGRECT/INFOBOX/TEXT:visible_characters")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ -1 ]
+}
+
+[sub_resource type="Animation" id=13]
+resource_name = "PSEND"
+length = 2.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/BGRECT/INFOBOX/TEXT:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ "", "Go,  MISSINGNO.!" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../MAIN/POKEMON/PLAYER:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.4, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1e-05, 1e-05 ), Vector2( 4, 4 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../MAIN/BARS/PLAYER:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 2.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=11]
+resource_name = "PSLIDE"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/TRAINER/PLAYER:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 336, 400 ), Vector2( 72, 400 ) ]
+}
+
+[node name="BTLSCENE" type="Node2D"]
+script = ExtResource( 7 )
+
+[node name="MAIN" type="Node" parent="."]
+
+[node name="BGRECT" type="ColorRect" parent="MAIN"]
+margin_left = 191.56
+margin_top = 160.0
+margin_right = 831.56
+margin_bottom = 736.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="INFOBOX" type="Control" parent="MAIN/BGRECT"]
+margin_left = 1.0
+margin_top = 357.0
+margin_right = 641.0
+margin_bottom = 576.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BGTEX" type="Control" parent="MAIN/BGRECT/INFOBOX"]
+margin_left = -1.0
+margin_top = 16.0
+margin_right = 39.0
+margin_bottom = 56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXGRP_1" type="Control" parent="MAIN/BGRECT/INFOBOX/BGTEX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_1" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_1"]
+margin_top = -16.0
+margin_right = 28.0
+margin_bottom = 12.0
+texture = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_2" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_1"]
+margin_left = 612.0
+margin_top = -16.0
+margin_right = 640.0
+margin_bottom = 12.0
+texture = SubResource( 2 )
+
+[node name="TX_3" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_1"]
+margin_top = 176.0
+margin_right = 28.0
+margin_bottom = 204.0
+texture = SubResource( 3 )
+
+[node name="TX_4" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_1"]
+margin_left = 612.116
+margin_top = 176.0
+margin_right = 640.116
+margin_bottom = 204.0
+texture = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXGRP_2" type="Control" parent="MAIN/BGRECT/INFOBOX/BGTEX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_1" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_2"]
+margin_left = 28.0
+margin_top = -12.0
+margin_right = 612.0
+margin_bottom = 12.0
+texture = SubResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_2" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_2"]
+margin_left = 28.0
+margin_top = 176.0
+margin_right = 612.0
+margin_bottom = 200.0
+texture = SubResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_3" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_2"]
+margin_left = 8.0
+margin_top = 12.0
+margin_right = 32.0
+margin_bottom = 177.0
+texture = SubResource( 7 )
+expand = true
+
+[node name="TX_4" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_2"]
+margin_left = 612.0
+margin_top = 12.0
+margin_right = 636.0
+margin_bottom = 177.0
+texture = SubResource( 8 )
+expand = true
+
+[node name="TEXT" type="RichTextLabel" parent="MAIN/BGRECT/INFOBOX"]
+margin_left = 32.0
+margin_top = 26.0
+margin_right = 611.0
+margin_bottom = 191.0
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BARS" type="Control" parent="MAIN"]
+margin_left = 192.0
+margin_top = 160.0
+margin_right = 835.0
+margin_bottom = 736.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ENEMY" type="Control" parent="MAIN/BARS"]
+visible = false
+margin_right = 335.0
+margin_bottom = 121.0
+
+[node name="NOCONNECT" type="Control" parent="MAIN/BARS/ENEMY"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_01" type="TextureRect" parent="MAIN/BARS/ENEMY/NOCONNECT"]
+margin_left = 24.0
+margin_top = 56.0
+margin_right = 332.0
+margin_bottom = 119.0
+texture = SubResource( 14 )
+flip_h = true
+
+[node name="TX_02" type="TextureRect" parent="MAIN/BARS/ENEMY/NOCONNECT"]
+margin_left = 41.0
+margin_top = 72.0
+margin_right = 85.0
+margin_bottom = 88.0
+texture = SubResource( 16 )
+
+[node name="TX_03" type="TextureRect" parent="MAIN/BARS/ENEMY/NOCONNECT"]
+margin_left = 105.0
+margin_top = 42.0
+margin_right = 149.0
+margin_bottom = 62.0
+texture = SubResource( 17 )
+
+[node name="VALUE" type="TextureProgress" parent="MAIN/BARS/ENEMY"]
+margin_left = 96.0
+margin_top = 72.0
+margin_right = 296.0
+margin_bottom = 88.0
+max_value = 0.0
+texture_under = SubResource( 18 )
+texture_progress = SubResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NAME" type="RichTextLabel" parent="MAIN/BARS/ENEMY"]
+margin_left = 16.0
+margin_right = 405.0
+margin_bottom = 36.0
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "MISSINGNO."
+scroll_active = false
+
+[node name="LEVEL" type="RichTextLabel" parent="MAIN/BARS/ENEMY"]
+margin_left = 134.0
+margin_top = 30.0
+margin_right = 232.0
+margin_bottom = 68.0
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PLAYER" type="Control" parent="MAIN/BARS"]
+visible = false
+margin_left = 267.0
+margin_top = 224.0
+margin_right = 603.0
+margin_bottom = 348.0
+
+[node name="NOCONNECT" type="Control" parent="MAIN/BARS/PLAYER"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_01" type="TextureRect" parent="MAIN/BARS/PLAYER/NOCONNECT"]
+margin_left = 24.0
+margin_top = 56.0
+margin_right = 332.0
+margin_bottom = 119.0
+texture = SubResource( 14 )
+
+[node name="TX_02" type="TextureRect" parent="MAIN/BARS/PLAYER/NOCONNECT"]
+margin_left = 57.0
+margin_top = 48.0
+margin_right = 101.0
+margin_bottom = 64.0
+texture = SubResource( 16 )
+
+[node name="TX_03" type="TextureRect" parent="MAIN/BARS/PLAYER/NOCONNECT"]
+margin_left = 121.0
+margin_top = 18.0
+margin_right = 165.0
+margin_bottom = 38.0
+texture = SubResource( 17 )
+
+[node name="VALUE" type="TextureProgress" parent="MAIN/BARS/PLAYER"]
+margin_left = 112.0
+margin_top = 48.0
+margin_right = 312.0
+margin_bottom = 64.0
+max_value = 0.0
+texture_under = SubResource( 18 )
+texture_progress = SubResource( 15 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NAME" type="RichTextLabel" parent="MAIN/BARS/PLAYER"]
+margin_left = 57.0
+margin_top = -24.0
+margin_right = 446.0
+margin_bottom = 12.0
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "MISSINGNO."
+scroll_active = false
+
+[node name="LEVEL" type="RichTextLabel" parent="MAIN/BARS/PLAYER"]
+margin_left = 150.0
+margin_top = 6.0
+margin_right = 248.0
+margin_bottom = 44.0
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HEALTH" type="RichTextLabel" parent="MAIN/BARS/PLAYER"]
+margin_left = 61.0
+margin_top = 68.0
+margin_right = 320.0
+margin_bottom = 107.0
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[right]255/255[/right]"
+text = "255/255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="POKEMON" type="Node2D" parent="MAIN"]
+
+[node name="ENEMY" type="Sprite" parent="MAIN/POKEMON"]
+position = Vector2( 712, 251 )
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 4 )
+vframes = 16
+hframes = 10
+frame = 2
+
+[node name="PLAYER" type="Sprite" parent="MAIN/POKEMON"]
+position = Vector2( 336, 392 )
+scale = Vector2( 1e-05, 1e-05 )
+texture = ExtResource( 5 )
+vframes = 13
+hframes = 12
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[node name="TRAINER" type="Node2D" parent="MAIN"]
+modulate = Color( 0.215686, 0.215686, 0.215686, 1 )
+
+[node name="ENEMY" type="Sprite" parent="MAIN/TRAINER"]
+position = Vector2( 936, 280 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 6 )
+hframes = 2
+
+[node name="PLAYER" type="Sprite" parent="MAIN/TRAINER"]
+position = Vector2( 72, 400 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 6 )
+hframes = 2
+frame = 1
+region_rect = Rect2( 0, 0, 64, 64 )
+
+[node name="FRAMERECT" type="TextureRect" parent="MAIN"]
+margin_left = -512.0
+margin_right = 1536.0
+margin_bottom = 896.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ENGINES" type="Node" parent="."]
+
+[node name="ANIM" type="AnimationPlayer" parent="ENGINES"]
+anims/BTLINIT = SubResource( 9 )
+anims/ESEND = SubResource( 12 )
+anims/ESLIDE = SubResource( 10 )
+anims/PSEND = SubResource( 13 )
+anims/PSLIDE = SubResource( 11 )

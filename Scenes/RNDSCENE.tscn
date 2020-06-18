@@ -1,0 +1,250 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://Assets/FRAME.png" type="Texture" id=1]
+[ext_resource path="res://Assets/HUDTEXT.png" type="Texture" id=2]
+[ext_resource path="res://Assets/PokeFont.tres" type="DynamicFont" id=3]
+[ext_resource path="res://Scripts/RNDSCENE.cs" type="Script" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 4, 4, 28, 28 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 4, 28, 28 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 4, 128, 28, 28 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 128, 28, 28 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 8, 32, 24 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 128, 32, 24 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 8, 64, 24, 32 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 64, 24, 32 )
+
+[sub_resource type="Animation" id=9]
+resource_name = "INIT"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/BGRECT/TBOX:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../MAIN/BGRECT/TBOX/TEXT:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=10]
+resource_name = "TRNS"
+length = 3.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/BGRECT:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../MAIN/FXRECT:rect_size")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.2, 2.45 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 576 ), Vector2( 640, 576 ) ]
+}
+
+[node name="RNDSCENE" type="Node2D"]
+script = ExtResource( 4 )
+
+[node name="MAIN" type="Node" parent="."]
+
+[node name="BGRECT" type="ColorRect" parent="MAIN"]
+margin_left = 192.0
+margin_top = 160.0
+margin_right = 832.0
+margin_bottom = 736.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TBOX" type="Control" parent="MAIN/BGRECT"]
+visible = false
+margin_left = 104.0
+margin_top = 184.0
+margin_right = 533.0
+margin_bottom = 389.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BGTEX" type="Control" parent="MAIN/BGRECT/TBOX"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TXGRP_1" type="Control" parent="MAIN/BGRECT/TBOX/BGTEX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_1" type="TextureRect" parent="MAIN/BGRECT/TBOX/BGTEX/TXGRP_1"]
+margin_right = 28.0
+margin_bottom = 28.0
+texture = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_2" type="TextureRect" parent="MAIN/BGRECT/TBOX/BGTEX/TXGRP_1"]
+margin_left = 400.0
+margin_right = 428.0
+margin_bottom = 28.0
+texture = SubResource( 2 )
+
+[node name="TX_3" type="TextureRect" parent="MAIN/BGRECT/TBOX/BGTEX/TXGRP_1"]
+margin_top = 176.0
+margin_right = 28.0
+margin_bottom = 204.0
+texture = SubResource( 3 )
+
+[node name="TX_4" type="TextureRect" parent="MAIN/BGRECT/TBOX/BGTEX/TXGRP_1"]
+margin_left = 400.116
+margin_top = 176.0
+margin_right = 428.116
+margin_bottom = 204.0
+texture = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXGRP_2" type="Control" parent="MAIN/BGRECT/TBOX/BGTEX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_1" type="TextureRect" parent="MAIN/BGRECT/TBOX/BGTEX/TXGRP_2"]
+margin_left = 28.0
+margin_top = 4.0
+margin_right = 400.0
+margin_bottom = 28.0
+texture = SubResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_2" type="TextureRect" parent="MAIN/BGRECT/TBOX/BGTEX/TXGRP_2"]
+margin_left = 28.0
+margin_top = 176.0
+margin_right = 400.0
+margin_bottom = 200.0
+texture = SubResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_3" type="TextureRect" parent="MAIN/BGRECT/TBOX/BGTEX/TXGRP_2"]
+margin_left = 8.0
+margin_top = 28.0
+margin_right = 32.0
+margin_bottom = 176.0
+texture = SubResource( 7 )
+expand = true
+
+[node name="TX_4" type="TextureRect" parent="MAIN/BGRECT/TBOX/BGTEX/TXGRP_2"]
+margin_left = 400.0
+margin_top = 28.0
+margin_right = 424.0
+margin_bottom = 176.0
+texture = SubResource( 8 )
+expand = true
+
+[node name="TEXT" type="RichTextLabel" parent="MAIN/BGRECT/TBOX"]
+visible = false
+margin_left = 32.0
+margin_top = 24.0
+margin_right = 400.0
+margin_bottom = 176.0
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "
+[center]Randomizing...
+Please Wait...[/center]"
+text = "
+Randomizing...
+Please Wait..."
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FXRECT" type="ColorRect" parent="MAIN"]
+margin_left = 192.0
+margin_top = 160.0
+margin_right = 192.0
+margin_bottom = 736.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FRAMERECT" type="TextureRect" parent="MAIN"]
+margin_left = -512.0
+margin_right = 1536.0
+margin_bottom = 896.0
+texture = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ENGINES" type="Node" parent="."]
+
+[node name="ANIM" type="AnimationPlayer" parent="ENGINES"]
+anims/INIT = SubResource( 9 )
+anims/TRNS = SubResource( 10 )
