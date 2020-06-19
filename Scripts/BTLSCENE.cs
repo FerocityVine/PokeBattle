@@ -17,6 +17,9 @@ public class BTLSCENE : Node2D
 	RichTextLabel PLevel;
 	RichTextLabel PHPText;
 	
+	TextureRect EBalls;
+	TextureRect PBalls;
+	
 	static int EIndex = 0;
 	static int PIndex = 0;
 	
@@ -41,8 +44,14 @@ public class BTLSCENE : Node2D
 		PLevel = GetNode("MAIN/BARS/PLAYER/LEVEL") as RichTextLabel;
 		PHPText = GetNode("MAIN/BARS/PLAYER/HEALTH") as RichTextLabel;
 		
+		EBalls = GetNode("MAIN/POKEBALLS/ENEMY/VALUE") as TextureRect;
+		PBalls = GetNode("MAIN/POKEBALLS/PLAYER/VALUE") as TextureRect;
+		
 		EPSprite.Frame = EPokemon.Species;
 		PPSprite.Frame = PPokemon.Species;
+		
+		EBalls.RectSize = new Vector2(35 * GlobalVars.Enemy.Party.Count, 35);
+		PBalls.RectSize = new Vector2(35 * GlobalVars.Player.Party.Count, 35);
 		
 		var ESEND = AnimPlayer.GetAnimation("ESEND");
 		var PSEND = AnimPlayer.GetAnimation("PSEND");

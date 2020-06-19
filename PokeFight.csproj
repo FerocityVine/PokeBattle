@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Tools</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9119F9C0-C7C7-42EA-A0AC-3DBA4989637A}</ProjectGuid>
+    <ProjectGuid>{3BE6E21A-7031-4E69-9CFA-B711C8F21A3D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <OutputPath>.mono\temp\bin\$(Configuration)</OutputPath>
     <RootNamespace>PokeFight</RootNamespace>
@@ -54,13 +54,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripts\RNDSCENE.cs" />
     <Compile Include="Scripts\BTLSCENE.cs" />
     <Compile Include="Scripts\GlobalVars.cs" />
+    <Compile Include="Scripts\Pokemon.cs" />
+    <Compile Include="Scripts\Trainer.cs" />
     <Compile Include="Scripts\Item.cs" />
     <Compile Include="Scripts\Move.cs" />
-    <Compile Include="Scripts\Pokemon.cs" />
-    <Compile Include="Scripts\RNDSCENE.cs" />
-    <Compile Include="Scripts\Trainer.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

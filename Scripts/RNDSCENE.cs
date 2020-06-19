@@ -57,6 +57,8 @@ public class RNDSCENE : Node2D
 	
 	public override void _Ready()
 	{
+		OS.SetWindowTitle("PokéFight v0.1 - PoC by FerocityVine");
+		
 		AnimPlayer = GetNode("ENGINES/ANIM") as AnimationPlayer;
 		AnimPlayer.Play(AnimQueue[0]);
 	}
