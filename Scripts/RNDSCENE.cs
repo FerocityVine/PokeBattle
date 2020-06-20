@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class RNDSCENE : Node2D
 {
 	AnimationPlayer AnimPlayer;
+	AudioStreamPlayer MusicPlayer;
 	
 	bool Initialized = false;
 	
@@ -15,7 +16,7 @@ public class RNDSCENE : Node2D
 	byte MinPokemon = 1;
 	
 	byte MaxLevel = 12;
-	byte MinLevel = 10;
+	byte MinLevel = 6;
 	
 	byte MaxSpecies = 9;
 	
@@ -60,6 +61,8 @@ public class RNDSCENE : Node2D
 		OS.SetWindowTitle("PokéFight v0.1 - PoC by FerocityVine");
 		
 		AnimPlayer = GetNode("ENGINES/ANIM") as AnimationPlayer;
+		MusicPlayer = GetNode("ENGINES/MUSIC") as AudioStreamPlayer;
+		
 		AnimPlayer.Play(AnimQueue[0]);
 	}
 	
@@ -72,6 +75,7 @@ public class RNDSCENE : Node2D
 				
 			else if (GenerateBattle())
 			{
+				MusicPlayer.Play(0);
 				AnimPlayer.Play(AnimQueue[1]);
 				Initialized = true;
 				

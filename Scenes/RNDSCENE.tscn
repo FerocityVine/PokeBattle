@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/FRAME.png" type="Texture" id=1]
 [ext_resource path="res://Assets/HUDTEXT.png" type="Texture" id=2]
 [ext_resource path="res://Assets/PokeFont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Scripts/RNDSCENE.cs" type="Script" id=4]
+[ext_resource path="res://Assets/BATTLE.wav" type="AudioStream" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -39,7 +40,7 @@ region = Rect2( 128, 64, 24, 32 )
 
 [sub_resource type="Animation" id=9]
 resource_name = "INIT"
-length = 2.0
+length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/BGRECT/TBOX:visible")
 tracks/0/interp = 1
@@ -47,7 +48,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5 ),
+"times": PoolRealArray( 0, 0.7 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -59,7 +60,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1 ),
+"times": PoolRealArray( 0, 1.3 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ false, true ]
@@ -109,7 +110,6 @@ __meta__ = {
 }
 
 [node name="TBOX" type="Control" parent="MAIN/BGRECT"]
-visible = false
 margin_left = 104.0
 margin_top = 184.0
 margin_right = 533.0
@@ -205,7 +205,6 @@ texture = SubResource( 8 )
 expand = true
 
 [node name="TEXT" type="RichTextLabel" parent="MAIN/BGRECT/TBOX"]
-visible = false
 margin_left = 32.0
 margin_top = 24.0
 margin_right = 400.0
@@ -248,3 +247,6 @@ __meta__ = {
 [node name="ANIM" type="AnimationPlayer" parent="ENGINES"]
 anims/INIT = SubResource( 9 )
 anims/TRNS = SubResource( 10 )
+
+[node name="MUSIC" type="AudioStreamPlayer" parent="ENGINES"]
+stream = ExtResource( 5 )

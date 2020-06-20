@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://Assets/FRAME.png" type="Texture" id=1]
 [ext_resource path="res://Assets/HUDTEXT.png" type="Texture" id=2]
@@ -9,6 +9,27 @@
 [ext_resource path="res://Scripts/BTLSCENE.cs" type="Script" id=7]
 [ext_resource path="res://Assets/BALLEMPTY.png" type="Texture" id=8]
 [ext_resource path="res://Assets/BALLFULL.png" type="Texture" id=9]
+[ext_resource path="res://Assets/BATTLE.wav" type="AudioStream" id=10]
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 172, 97, 308, 63 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 172, 4, 44, 16 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 440, 4, 24, 20 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 228, 4, 200, 16 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 2 )
+region = Rect2( 228, 22, 200, 16 )
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -42,28 +63,12 @@ region = Rect2( 8, 64, 24, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 128, 64, 24, 32 )
 
-[sub_resource type="AtlasTexture" id=9]
+[sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 2 )
-region = Rect2( 172, 97, 308, 63 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 2 )
-region = Rect2( 172, 4, 44, 16 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 2 )
-region = Rect2( 440, 4, 24, 20 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 2 )
-region = Rect2( 228, 4, 200, 16 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 2 )
-region = Rect2( 228, 22, 200, 16 )
+region = Rect2( 500, 96, 20, 28 )
 
 [sub_resource type="Animation" id=14]
-length = 2.5
+length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/TRAINER/ENEMY:position")
 tracks/0/interp = 1
@@ -101,7 +106,7 @@ tracks/2/keys = {
 "values": [ Color( 0.215686, 0.215686, 0.215686, 1 ), Color( 1, 1, 1, 1 ) ]
 }
 tracks/3/type = "value"
-tracks/3/path = NodePath("../MAIN/BGRECT/INFOBOX/TEXT:text")
+tracks/3/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/imported = false
@@ -113,7 +118,7 @@ tracks/3/keys = {
 "values": [ "", "$% TRAINER wants to battle." ]
 }
 tracks/4/type = "value"
-tracks/4/path = NodePath("../MAIN/BGRECT/INFOBOX/TEXT:visible_characters")
+tracks/4/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:visible_characters")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/imported = false
@@ -152,7 +157,7 @@ tracks/6/keys = {
 [sub_resource type="Animation" id=15]
 length = 2.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("../MAIN/BGRECT/INFOBOX/TEXT:text")
+tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -170,7 +175,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1.4, 1.6 ),
+"times": PoolRealArray( 0, 1.4, 1.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1e-05, 1e-05 ), Vector2( 4, 4 ) ]
@@ -203,7 +208,7 @@ tracks/0/keys = {
 "values": [ Vector2( 704, 280 ), Vector2( 936, 280 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("../MAIN/BGRECT/INFOBOX/TEXT:visible_characters")
+tracks/1/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:visible_characters")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -227,10 +232,37 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="Animation" id=20]
+resource_name = "INITMENU"
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../MAIN/MENUS/ACTBOX:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
 [sub_resource type="Animation" id=17]
 length = 2.4
 tracks/0/type = "value"
-tracks/0/path = NodePath("../MAIN/BGRECT/INFOBOX/TEXT:text")
+tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -248,7 +280,7 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 1.4, 1.6 ),
+"times": PoolRealArray( 0, 1.4, 1.5 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1e-05, 1e-05 ), Vector2( 4, 4 ) ]
@@ -303,121 +335,6 @@ margin_left = 191.56
 margin_top = 160.0
 margin_right = 831.56
 margin_bottom = 736.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="INFOBOX" type="Control" parent="MAIN/BGRECT"]
-margin_left = 1.0
-margin_top = 357.0
-margin_right = 641.0
-margin_bottom = 576.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="BGTEX" type="Control" parent="MAIN/BGRECT/INFOBOX"]
-margin_left = -1.0
-margin_top = 16.0
-margin_right = 39.0
-margin_bottom = 56.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TXGRP_1" type="Control" parent="MAIN/BGRECT/INFOBOX/BGTEX"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TX_1" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_1"]
-margin_top = -16.0
-margin_right = 28.0
-margin_bottom = 12.0
-texture = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TX_2" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_1"]
-margin_left = 612.0
-margin_top = -16.0
-margin_right = 640.0
-margin_bottom = 12.0
-texture = SubResource( 2 )
-
-[node name="TX_3" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_1"]
-margin_top = 176.0
-margin_right = 28.0
-margin_bottom = 204.0
-texture = SubResource( 3 )
-
-[node name="TX_4" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_1"]
-margin_left = 612.116
-margin_top = 176.0
-margin_right = 640.116
-margin_bottom = 204.0
-texture = SubResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TXGRP_2" type="Control" parent="MAIN/BGRECT/INFOBOX/BGTEX"]
-margin_right = 40.0
-margin_bottom = 40.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TX_1" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_2"]
-margin_left = 28.0
-margin_top = -12.0
-margin_right = 612.0
-margin_bottom = 12.0
-texture = SubResource( 5 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TX_2" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_2"]
-margin_left = 28.0
-margin_top = 176.0
-margin_right = 612.0
-margin_bottom = 200.0
-texture = SubResource( 6 )
-expand = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TX_3" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_2"]
-margin_left = 8.0
-margin_top = 12.0
-margin_right = 32.0
-margin_bottom = 177.0
-texture = SubResource( 7 )
-expand = true
-
-[node name="TX_4" type="TextureRect" parent="MAIN/BGRECT/INFOBOX/BGTEX/TXGRP_2"]
-margin_left = 612.0
-margin_top = 12.0
-margin_right = 636.0
-margin_bottom = 177.0
-texture = SubResource( 8 )
-expand = true
-
-[node name="TEXT" type="RichTextLabel" parent="MAIN/BGRECT/INFOBOX"]
-margin_left = 32.0
-margin_top = 26.0
-margin_right = 611.0
-margin_bottom = 191.0
-custom_fonts/normal_font = ExtResource( 3 )
-custom_colors/default_color = Color( 0, 0, 0, 1 )
-bbcode_enabled = true
-scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -726,10 +643,704 @@ hframes = 2
 frame = 1
 region_rect = Rect2( 0, 0, 64, 64 )
 
+[node name="MENUS" type="Control" parent="MAIN"]
+margin_left = 191.56
+margin_top = 160.0
+margin_right = 231.56
+margin_bottom = 200.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="INFBOX" type="Control" parent="MAIN/MENUS"]
+margin_left = 1.0
+margin_top = 357.0
+margin_right = 641.0
+margin_bottom = 576.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BGTEX" type="Control" parent="MAIN/MENUS/INFBOX"]
+margin_left = -1.0
+margin_top = 16.0
+margin_right = 39.0
+margin_bottom = 56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXGRP_1" type="Control" parent="MAIN/MENUS/INFBOX/BGTEX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_1" type="TextureRect" parent="MAIN/MENUS/INFBOX/BGTEX/TXGRP_1"]
+margin_top = -16.0
+margin_right = 28.0
+margin_bottom = 12.0
+texture = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_2" type="TextureRect" parent="MAIN/MENUS/INFBOX/BGTEX/TXGRP_1"]
+margin_left = 612.0
+margin_top = -16.0
+margin_right = 640.0
+margin_bottom = 12.0
+texture = SubResource( 2 )
+
+[node name="TX_3" type="TextureRect" parent="MAIN/MENUS/INFBOX/BGTEX/TXGRP_1"]
+margin_top = 176.0
+margin_right = 28.0
+margin_bottom = 204.0
+texture = SubResource( 3 )
+
+[node name="TX_4" type="TextureRect" parent="MAIN/MENUS/INFBOX/BGTEX/TXGRP_1"]
+margin_left = 612.116
+margin_top = 176.0
+margin_right = 640.116
+margin_bottom = 204.0
+texture = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXGRP_2" type="Control" parent="MAIN/MENUS/INFBOX/BGTEX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_1" type="TextureRect" parent="MAIN/MENUS/INFBOX/BGTEX/TXGRP_2"]
+margin_left = 28.0
+margin_top = -12.0
+margin_right = 612.0
+margin_bottom = 12.0
+texture = SubResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_2" type="TextureRect" parent="MAIN/MENUS/INFBOX/BGTEX/TXGRP_2"]
+margin_left = 28.0
+margin_top = 176.0
+margin_right = 612.0
+margin_bottom = 200.0
+texture = SubResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_3" type="TextureRect" parent="MAIN/MENUS/INFBOX/BGTEX/TXGRP_2"]
+margin_left = 8.0
+margin_top = 12.0
+margin_right = 32.0
+margin_bottom = 177.0
+texture = SubResource( 7 )
+expand = true
+
+[node name="TX_4" type="TextureRect" parent="MAIN/MENUS/INFBOX/BGTEX/TXGRP_2"]
+margin_left = 612.0
+margin_top = 12.0
+margin_right = 636.0
+margin_bottom = 177.0
+texture = SubResource( 8 )
+expand = true
+
+[node name="TEXT" type="RichTextLabel" parent="MAIN/MENUS/INFBOX"]
+margin_left = 32.0
+margin_top = 26.0
+margin_right = 611.0
+margin_bottom = 191.0
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+visible_characters = 5
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ACTBOX" type="Control" parent="MAIN/MENUS"]
+visible = false
+margin_left = 1.0
+margin_top = 357.0
+margin_right = 641.0
+margin_bottom = 576.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BGTEX" type="Control" parent="MAIN/MENUS/ACTBOX"]
+margin_left = -1.0
+margin_top = 16.0
+margin_right = 39.0
+margin_bottom = 56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXGRP_1" type="Control" parent="MAIN/MENUS/ACTBOX/BGTEX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_1" type="TextureRect" parent="MAIN/MENUS/ACTBOX/BGTEX/TXGRP_1"]
+margin_left = 233.0
+margin_top = -16.0
+margin_right = 261.0
+margin_bottom = 12.0
+texture = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_2" type="TextureRect" parent="MAIN/MENUS/ACTBOX/BGTEX/TXGRP_1"]
+margin_left = 612.0
+margin_top = -16.0
+margin_right = 640.0
+margin_bottom = 12.0
+texture = SubResource( 2 )
+
+[node name="TX_3" type="TextureRect" parent="MAIN/MENUS/ACTBOX/BGTEX/TXGRP_1"]
+margin_left = 233.0
+margin_top = 176.0
+margin_right = 261.0
+margin_bottom = 204.0
+texture = SubResource( 3 )
+
+[node name="TX_4" type="TextureRect" parent="MAIN/MENUS/ACTBOX/BGTEX/TXGRP_1"]
+margin_left = 612.116
+margin_top = 176.0
+margin_right = 640.116
+margin_bottom = 204.0
+texture = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXGRP_2" type="Control" parent="MAIN/MENUS/ACTBOX/BGTEX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_1" type="TextureRect" parent="MAIN/MENUS/ACTBOX/BGTEX/TXGRP_2"]
+margin_left = 261.0
+margin_top = -12.0
+margin_right = 612.0
+margin_bottom = 12.0
+texture = SubResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_2" type="TextureRect" parent="MAIN/MENUS/ACTBOX/BGTEX/TXGRP_2"]
+margin_left = 261.0
+margin_top = 176.0
+margin_right = 612.0
+margin_bottom = 200.0
+texture = SubResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_3" type="TextureRect" parent="MAIN/MENUS/ACTBOX/BGTEX/TXGRP_2"]
+margin_left = 241.0
+margin_top = 12.0
+margin_right = 265.0
+margin_bottom = 177.0
+texture = SubResource( 7 )
+expand = true
+
+[node name="TX_4" type="TextureRect" parent="MAIN/MENUS/ACTBOX/BGTEX/TXGRP_2"]
+margin_left = 612.0
+margin_top = 12.0
+margin_right = 636.0
+margin_bottom = 177.0
+texture = SubResource( 8 )
+expand = true
+
+[node name="INPUT" type="Control" parent="MAIN/MENUS/ACTBOX"]
+margin_left = 5.0
+margin_top = 34.0
+margin_right = 45.0
+margin_bottom = 74.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BTN1" type="TextureButton" parent="MAIN/MENUS/ACTBOX/INPUT"]
+margin_left = 265.0
+margin_top = 32.0
+margin_right = 455.0
+margin_bottom = 82.0
+texture_hover = SubResource( 19 )
+
+[node name="TXT" type="RichTextLabel" parent="MAIN/MENUS/ACTBOX/INPUT/BTN1"]
+margin_left = 32.0
+margin_top = -6.0
+margin_right = 186.0
+margin_bottom = 34.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "FIGHT"
+scroll_active = false
+
+[node name="BTN2" type="TextureButton" parent="MAIN/MENUS/ACTBOX/INPUT"]
+margin_left = 455.0
+margin_top = 32.0
+margin_right = 562.0
+margin_bottom = 82.0
+texture_hover = SubResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXT" type="RichTextLabel" parent="MAIN/MENUS/ACTBOX/INPUT/BTN2"]
+margin_left = 38.0
+margin_top = -6.0
+margin_right = 105.0
+margin_bottom = 28.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "$%"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BTN3" type="TextureButton" parent="MAIN/MENUS/ACTBOX/INPUT"]
+margin_left = 265.0
+margin_top = 96.0
+margin_right = 450.0
+margin_bottom = 139.0
+texture_hover = SubResource( 19 )
+
+[node name="TXT" type="RichTextLabel" parent="MAIN/MENUS/ACTBOX/INPUT/BTN3"]
+margin_left = 32.0
+margin_top = -6.0
+margin_right = 186.0
+margin_bottom = 36.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "ITEM"
+scroll_active = false
+
+[node name="BTN4" type="TextureButton" parent="MAIN/MENUS/ACTBOX/INPUT"]
+margin_left = 456.0
+margin_top = 96.0
+margin_right = 595.0
+margin_bottom = 142.0
+texture_hover = SubResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXT" type="RichTextLabel" parent="MAIN/MENUS/ACTBOX/INPUT/BTN4"]
+margin_left = 38.0
+margin_top = -6.0
+margin_right = 135.0
+margin_bottom = 32.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "RUN"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BTLBOX" type="Control" parent="MAIN/MENUS"]
+visible = false
+margin_left = 1.0
+margin_top = 357.0
+margin_right = 641.0
+margin_bottom = 576.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ACTBOX" type="Control" parent="MAIN/MENUS/BTLBOX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BGTEX" type="Control" parent="MAIN/MENUS/BTLBOX/ACTBOX"]
+margin_left = -1.0
+margin_top = 16.0
+margin_right = 39.0
+margin_bottom = 56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXGRP_1" type="Control" parent="MAIN/MENUS/BTLBOX/ACTBOX/BGTEX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_1" type="TextureRect" parent="MAIN/MENUS/BTLBOX/ACTBOX/BGTEX/TXGRP_1"]
+margin_left = 145.0
+margin_top = -16.0
+margin_right = 173.0
+margin_bottom = 12.0
+texture = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_2" type="TextureRect" parent="MAIN/MENUS/BTLBOX/ACTBOX/BGTEX/TXGRP_1"]
+margin_left = 612.0
+margin_top = -16.0
+margin_right = 640.0
+margin_bottom = 12.0
+texture = SubResource( 2 )
+
+[node name="TX_3" type="TextureRect" parent="MAIN/MENUS/BTLBOX/ACTBOX/BGTEX/TXGRP_1"]
+margin_left = 145.0
+margin_top = 176.0
+margin_right = 173.0
+margin_bottom = 204.0
+texture = SubResource( 3 )
+
+[node name="TX_4" type="TextureRect" parent="MAIN/MENUS/BTLBOX/ACTBOX/BGTEX/TXGRP_1"]
+margin_left = 612.116
+margin_top = 176.0
+margin_right = 640.116
+margin_bottom = 204.0
+texture = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXGRP_2" type="Control" parent="MAIN/MENUS/BTLBOX/ACTBOX/BGTEX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_1" type="TextureRect" parent="MAIN/MENUS/BTLBOX/ACTBOX/BGTEX/TXGRP_2"]
+margin_left = 178.0
+margin_top = -12.0
+margin_right = 612.0
+margin_bottom = 12.0
+texture = SubResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_2" type="TextureRect" parent="MAIN/MENUS/BTLBOX/ACTBOX/BGTEX/TXGRP_2"]
+margin_left = 177.0
+margin_top = 176.0
+margin_right = 612.0
+margin_bottom = 200.0
+texture = SubResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_3" type="TextureRect" parent="MAIN/MENUS/BTLBOX/ACTBOX/BGTEX/TXGRP_2"]
+margin_left = 153.0
+margin_top = 12.0
+margin_right = 177.0
+margin_bottom = 177.0
+texture = SubResource( 7 )
+expand = true
+
+[node name="TX_4" type="TextureRect" parent="MAIN/MENUS/BTLBOX/ACTBOX/BGTEX/TXGRP_2"]
+margin_left = 612.0
+margin_top = 12.0
+margin_right = 636.0
+margin_bottom = 177.0
+texture = SubResource( 8 )
+expand = true
+
+[node name="INPUT" type="Control" parent="MAIN/MENUS/BTLBOX/ACTBOX"]
+margin_left = 5.0
+margin_top = 34.0
+margin_right = 45.0
+margin_bottom = 74.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BTN1" type="TextureButton" parent="MAIN/MENUS/BTLBOX/ACTBOX/INPUT"]
+margin_left = 169.0
+margin_top = 3.0
+margin_right = 359.0
+margin_bottom = 42.0
+disabled = true
+texture_hover = SubResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXT" type="RichTextLabel" parent="MAIN/MENUS/BTLBOX/ACTBOX/INPUT/BTN1"]
+margin_left = 32.0
+margin_top = -4.0
+margin_right = 438.0
+margin_bottom = 36.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "-
+"
+scroll_active = false
+
+[node name="BTN2" type="TextureButton" parent="MAIN/MENUS/BTLBOX/ACTBOX/INPUT"]
+margin_left = 169.0
+margin_top = 43.0
+margin_right = 359.0
+margin_bottom = 82.0
+disabled = true
+texture_hover = SubResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXT" type="RichTextLabel" parent="MAIN/MENUS/BTLBOX/ACTBOX/INPUT/BTN2"]
+margin_left = 32.0
+margin_top = -4.0
+margin_right = 438.0
+margin_bottom = 36.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "-
+"
+scroll_active = false
+
+[node name="BTN3" type="TextureButton" parent="MAIN/MENUS/BTLBOX/ACTBOX/INPUT"]
+margin_left = 169.0
+margin_top = 83.0
+margin_right = 359.0
+margin_bottom = 122.0
+disabled = true
+texture_hover = SubResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXT" type="RichTextLabel" parent="MAIN/MENUS/BTLBOX/ACTBOX/INPUT/BTN3"]
+margin_left = 32.0
+margin_top = -4.0
+margin_right = 438.0
+margin_bottom = 36.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "-
+"
+scroll_active = false
+
+[node name="BTN4" type="TextureButton" parent="MAIN/MENUS/BTLBOX/ACTBOX/INPUT"]
+margin_left = 169.0
+margin_top = 123.0
+margin_right = 359.0
+margin_bottom = 162.0
+disabled = true
+texture_hover = SubResource( 19 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXT" type="RichTextLabel" parent="MAIN/MENUS/BTLBOX/ACTBOX/INPUT/BTN4"]
+margin_left = 32.0
+margin_top = -4.0
+margin_right = 438.0
+margin_bottom = 36.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "-
+"
+scroll_active = false
+
+[node name="INFBOX" type="Control" parent="MAIN/MENUS/BTLBOX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BGTEX" type="Control" parent="MAIN/MENUS/BTLBOX/INFBOX"]
+margin_left = -1.0
+margin_top = 16.0
+margin_right = 39.0
+margin_bottom = 56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXGRP_1" type="Control" parent="MAIN/MENUS/BTLBOX/INFBOX/BGTEX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_1" type="TextureRect" parent="MAIN/MENUS/BTLBOX/INFBOX/BGTEX/TXGRP_1"]
+margin_top = -148.0
+margin_right = 28.0
+margin_bottom = -120.0
+texture = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_2" type="TextureRect" parent="MAIN/MENUS/BTLBOX/INFBOX/BGTEX/TXGRP_1"]
+margin_left = 355.0
+margin_top = -148.0
+margin_right = 383.0
+margin_bottom = -120.0
+texture = SubResource( 2 )
+
+[node name="TX_3" type="TextureRect" parent="MAIN/MENUS/BTLBOX/INFBOX/BGTEX/TXGRP_1"]
+margin_top = -20.0
+margin_right = 28.0
+margin_bottom = 8.0
+texture = SubResource( 3 )
+
+[node name="TX_4" type="TextureRect" parent="MAIN/MENUS/BTLBOX/INFBOX/BGTEX/TXGRP_1"]
+margin_left = 355.116
+margin_top = -20.0
+margin_right = 383.116
+margin_bottom = 8.0
+texture = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXGRP_2" type="Control" parent="MAIN/MENUS/BTLBOX/INFBOX/BGTEX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_1" type="TextureRect" parent="MAIN/MENUS/BTLBOX/INFBOX/BGTEX/TXGRP_2"]
+margin_left = 28.0
+margin_top = -144.0
+margin_right = 355.0
+margin_bottom = -120.0
+texture = SubResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_2" type="TextureRect" parent="MAIN/MENUS/BTLBOX/INFBOX/BGTEX/TXGRP_2"]
+margin_left = 32.0
+margin_top = -20.0
+margin_right = 355.0
+margin_bottom = 4.0
+texture = SubResource( 6 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_3" type="TextureRect" parent="MAIN/MENUS/BTLBOX/INFBOX/BGTEX/TXGRP_2"]
+margin_left = 8.0
+margin_top = -121.0
+margin_right = 32.0
+margin_bottom = -19.0
+texture = SubResource( 7 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_4" type="TextureRect" parent="MAIN/MENUS/BTLBOX/INFBOX/BGTEX/TXGRP_2"]
+margin_left = 355.0
+margin_top = -120.0
+margin_right = 379.0
+margin_bottom = -20.0
+texture = SubResource( 8 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TEXT" type="Control" parent="MAIN/MENUS/BTLBOX/INFBOX"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="NOCONNECT" type="Control" parent="MAIN/MENUS/BTLBOX/INFBOX/TEXT"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="TXT_01" type="RichTextLabel" parent="MAIN/MENUS/BTLBOX/INFBOX/TEXT/NOCONNECT"]
+margin_left = 32.0
+margin_top = -106.0
+margin_right = 203.0
+margin_bottom = -66.0
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "TYPE/"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TYPE" type="RichTextLabel" parent="MAIN/MENUS/BTLBOX/INFBOX/TEXT"]
+margin_left = 29.0
+margin_top = -70.0
+margin_right = 357.0
+margin_bottom = -30.0
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[center]MISSINGNO.[/center]"
+text = "MISSINGNO."
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="COUNT" type="RichTextLabel" parent="MAIN/MENUS/BTLBOX/INFBOX/TEXT"]
+margin_left = 29.0
+margin_top = -38.0
+margin_right = 357.0
+margin_bottom = 2.0
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[right]255/255[/right]"
+text = "255/255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="FRAMERECT" type="TextureRect" parent="MAIN"]
 margin_left = -512.0
 margin_right = 1536.0
 margin_bottom = 896.0
+mouse_filter = 2
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -741,5 +1352,9 @@ __meta__ = {
 anims/BTLINIT = SubResource( 14 )
 anims/ESEND = SubResource( 15 )
 anims/ESLIDE = SubResource( 16 )
+anims/INITMENU = SubResource( 20 )
 anims/PSEND = SubResource( 17 )
 anims/PSLIDE = SubResource( 18 )
+
+[node name="MUSIC" type="AudioStreamPlayer" parent="ENGINES"]
+stream = ExtResource( 10 )

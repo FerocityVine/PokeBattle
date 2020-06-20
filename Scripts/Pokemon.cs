@@ -5,12 +5,41 @@ using System.Collections.Generic;
 
 public class Pokemon
 {
-	public List<Move> Moveset;
+	static Move TACKLE = new Move(0, 0x0A, 35, 40, 100, 0);
+	static Move POUND = new Move(1, 0x0A, 35, 40, 100, 0);
+	
+	public List<Move> Moveset = new List<Move> { TACKLE, POUND };
 	public List<byte> IVArray;
 	public List<byte> Stats;
 	public byte Level;
 	public byte Species;
 	public byte HP;
+	
+	public static string[] TypeNames = new string[]
+	{
+		"BUG",
+		"DRAGON",
+		"ELECTRIC",
+		"FIGHTING",
+		"FIRE",
+		"FLYING",
+		"GHOST",
+		"GRASS",
+		"GROUND",
+		"ICE",
+		"NORMAL",
+		"POISON",
+		"PSYCHIC",
+		"ROCK",
+		"WATER"
+	};
+	
+	
+	public static string[] MoveNames = new string[]
+	{
+		"TACKLE",
+		"POUND"
+	};
 	
 	public static string[] PokeNames = new string[] 
 	{
