@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Assets/FRAME.png" type="Texture" id=1]
 [ext_resource path="res://Assets/HUDTEXT.png" type="Texture" id=2]
@@ -9,65 +9,97 @@
 [ext_resource path="res://Scripts/BTLSCENE.cs" type="Script" id=7]
 [ext_resource path="res://Assets/BALLEMPTY.png" type="Texture" id=8]
 [ext_resource path="res://Assets/BALLFULL.png" type="Texture" id=9]
-[ext_resource path="res://Assets/BATTLE.wav" type="AudioStream" id=10]
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 2 )
-region = Rect2( 172, 97, 308, 63 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 2 )
-region = Rect2( 172, 4, 44, 16 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 2 )
-region = Rect2( 440, 4, 24, 20 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 2 )
-region = Rect2( 228, 4, 200, 16 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 2 )
-region = Rect2( 228, 22, 200, 16 )
+[ext_resource path="res://Assets/MENUSPRITE.png" type="Texture" id=10]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
-region = Rect2( 4, 4, 28, 28 )
+region = Rect2( 172, 97, 308, 63 )
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
-region = Rect2( 128, 4, 28, 28 )
+region = Rect2( 172, 4, 44, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
-region = Rect2( 4, 128, 28, 28 )
+region = Rect2( 440, 4, 24, 20 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
-region = Rect2( 128, 128, 28, 28 )
+region = Rect2( 228, 4, 200, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 8, 32, 24 )
+region = Rect2( 228, 22, 200, 16 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 128, 32, 24 )
+region = Rect2( 4, 4, 28, 28 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
-region = Rect2( 8, 64, 24, 32 )
+region = Rect2( 128, 4, 28, 28 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 2 )
+region = Rect2( 4, 128, 28, 28 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 128, 128, 28, 28 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 8, 32, 24 )
+
+[sub_resource type="AtlasTexture" id=11]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 128, 32, 24 )
+
+[sub_resource type="AtlasTexture" id=12]
+atlas = ExtResource( 2 )
+region = Rect2( 8, 64, 24, 32 )
+
+[sub_resource type="AtlasTexture" id=13]
+atlas = ExtResource( 2 )
 region = Rect2( 128, 64, 24, 32 )
 
-[sub_resource type="AtlasTexture" id=19]
+[sub_resource type="AtlasTexture" id=21]
 atlas = ExtResource( 2 )
 region = Rect2( 500, 96, 20, 28 )
 
-[sub_resource type="Animation" id=14]
+[sub_resource type="AtlasTexture" id=14]
+atlas = ExtResource( 2 )
+region = Rect2( 500, 80, 20, 60 )
+
+[sub_resource type="Animation" id=24]
+resource_name = "POKEPLAY"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("INPUT/POKESEL1/POKE:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("POKEANIM:playback_speed")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 2.0 ]
+}
+
+[sub_resource type="Animation" id=15]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/TRAINER/ENEMY:position")
@@ -154,7 +186,7 @@ tracks/6/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=16]
 length = 2.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
@@ -193,7 +225,7 @@ tracks/2/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=17]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/TRAINER/ENEMY:position")
@@ -232,7 +264,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=18]
 resource_name = "INITMENU"
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
@@ -259,7 +291,103 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=23]
+resource_name = "NORUN"
+length = 1.75
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/MENUS/ACTBOX:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.9 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ "", "Cannot run from a trainer battle." ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "PCALL"
+length = 2.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ "", "That's enough, MISSINGNO.. Come back!" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../MAIN/POKEMON/PLAYER:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1.4, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 4, 4 ), Vector2( 4, 4 ), Vector2( 1e-05, 1e-05 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../MAIN/BARS/PLAYER:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=22]
+resource_name = "PKMNINIT"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/MENUS/POKBOX/INFBOX:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../MAIN/MENUS/POKBOX/INPUT:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ false, true ]
+}
+
+[sub_resource type="Animation" id=19]
 length = 2.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
@@ -298,7 +426,7 @@ tracks/2/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=18]
+[sub_resource type="Animation" id=20]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/TRAINER/PLAYER:position")
@@ -365,7 +493,7 @@ margin_left = 24.0
 margin_top = 56.0
 margin_right = 332.0
 margin_bottom = 119.0
-texture = SubResource( 9 )
+texture = SubResource( 1 )
 flip_h = true
 
 [node name="TX_02" type="TextureRect" parent="MAIN/BARS/ENEMY/NOCONNECT"]
@@ -373,14 +501,14 @@ margin_left = 41.0
 margin_top = 72.0
 margin_right = 85.0
 margin_bottom = 88.0
-texture = SubResource( 10 )
+texture = SubResource( 2 )
 
 [node name="TX_03" type="TextureRect" parent="MAIN/BARS/ENEMY/NOCONNECT"]
 margin_left = 105.0
 margin_top = 42.0
 margin_right = 149.0
 margin_bottom = 62.0
-texture = SubResource( 11 )
+texture = SubResource( 3 )
 
 [node name="VALUE" type="TextureProgress" parent="MAIN/BARS/ENEMY"]
 margin_left = 96.0
@@ -388,8 +516,8 @@ margin_top = 72.0
 margin_right = 296.0
 margin_bottom = 88.0
 max_value = 0.0
-texture_under = SubResource( 12 )
-texture_progress = SubResource( 13 )
+texture_under = SubResource( 4 )
+texture_progress = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -435,21 +563,21 @@ margin_left = 24.0
 margin_top = 56.0
 margin_right = 332.0
 margin_bottom = 119.0
-texture = SubResource( 9 )
+texture = SubResource( 1 )
 
 [node name="TX_02" type="TextureRect" parent="MAIN/BARS/PLAYER/NOCONNECT"]
 margin_left = 57.0
 margin_top = 48.0
 margin_right = 101.0
 margin_bottom = 64.0
-texture = SubResource( 10 )
+texture = SubResource( 2 )
 
 [node name="TX_03" type="TextureRect" parent="MAIN/BARS/PLAYER/NOCONNECT"]
 margin_left = 121.0
 margin_top = 18.0
 margin_right = 165.0
 margin_bottom = 38.0
-texture = SubResource( 11 )
+texture = SubResource( 3 )
 
 [node name="VALUE" type="TextureProgress" parent="MAIN/BARS/PLAYER"]
 margin_left = 112.0
@@ -457,8 +585,8 @@ margin_top = 48.0
 margin_right = 312.0
 margin_bottom = 64.0
 max_value = 0.0
-texture_under = SubResource( 12 )
-texture_progress = SubResource( 13 )
+texture_under = SubResource( 4 )
+texture_progress = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -530,7 +658,7 @@ margin_left = 24.0
 margin_top = 56.0
 margin_right = 332.0
 margin_bottom = 119.0
-texture = SubResource( 9 )
+texture = SubResource( 1 )
 flip_h = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -579,7 +707,7 @@ margin_left = 24.0
 margin_top = 56.0
 margin_right = 332.0
 margin_bottom = 119.0
-texture = SubResource( 9 )
+texture = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -681,7 +809,7 @@ __meta__ = {
 margin_top = -16.0
 margin_right = 28.0
 margin_bottom = 12.0
-texture = SubResource( 1 )
+texture = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -691,20 +819,20 @@ margin_left = 612.0
 margin_top = -16.0
 margin_right = 640.0
 margin_bottom = 12.0
-texture = SubResource( 2 )
+texture = SubResource( 7 )
 
 [node name="TX_3" type="TextureRect" parent="MAIN/MENUS/INFBOX/BGTEX/TXGRP_1"]
 margin_top = 176.0
 margin_right = 28.0
 margin_bottom = 204.0
-texture = SubResource( 3 )
+texture = SubResource( 8 )
 
 [node name="TX_4" type="TextureRect" parent="MAIN/MENUS/INFBOX/BGTEX/TXGRP_1"]
 margin_left = 612.116
 margin_top = 176.0
 margin_right = 640.116
 margin_bottom = 204.0
-texture = SubResource( 4 )
+texture = SubResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -721,7 +849,7 @@ margin_left = 28.0
 margin_top = -12.0
 margin_right = 612.0
 margin_bottom = 12.0
-texture = SubResource( 5 )
+texture = SubResource( 10 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -732,7 +860,7 @@ margin_left = 28.0
 margin_top = 176.0
 margin_right = 612.0
 margin_bottom = 200.0
-texture = SubResource( 6 )
+texture = SubResource( 11 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -743,7 +871,7 @@ margin_left = 8.0
 margin_top = 12.0
 margin_right = 32.0
 margin_bottom = 177.0
-texture = SubResource( 7 )
+texture = SubResource( 12 )
 expand = true
 
 [node name="TX_4" type="TextureRect" parent="MAIN/MENUS/INFBOX/BGTEX/TXGRP_2"]
@@ -751,7 +879,7 @@ margin_left = 612.0
 margin_top = 12.0
 margin_right = 636.0
 margin_bottom = 177.0
-texture = SubResource( 8 )
+texture = SubResource( 13 )
 expand = true
 
 [node name="TEXT" type="RichTextLabel" parent="MAIN/MENUS/INFBOX"]
@@ -762,7 +890,7 @@ margin_bottom = 191.0
 custom_fonts/normal_font = ExtResource( 3 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
-visible_characters = 5
+visible_characters = 0
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -799,7 +927,7 @@ margin_left = 233.0
 margin_top = -16.0
 margin_right = 261.0
 margin_bottom = 12.0
-texture = SubResource( 1 )
+texture = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -809,21 +937,21 @@ margin_left = 612.0
 margin_top = -16.0
 margin_right = 640.0
 margin_bottom = 12.0
-texture = SubResource( 2 )
+texture = SubResource( 7 )
 
 [node name="TX_3" type="TextureRect" parent="MAIN/MENUS/ACTBOX/BGTEX/TXGRP_1"]
 margin_left = 233.0
 margin_top = 176.0
 margin_right = 261.0
 margin_bottom = 204.0
-texture = SubResource( 3 )
+texture = SubResource( 8 )
 
 [node name="TX_4" type="TextureRect" parent="MAIN/MENUS/ACTBOX/BGTEX/TXGRP_1"]
 margin_left = 612.116
 margin_top = 176.0
 margin_right = 640.116
 margin_bottom = 204.0
-texture = SubResource( 4 )
+texture = SubResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -840,7 +968,7 @@ margin_left = 261.0
 margin_top = -12.0
 margin_right = 612.0
 margin_bottom = 12.0
-texture = SubResource( 5 )
+texture = SubResource( 10 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -851,7 +979,7 @@ margin_left = 261.0
 margin_top = 176.0
 margin_right = 612.0
 margin_bottom = 200.0
-texture = SubResource( 6 )
+texture = SubResource( 11 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -862,7 +990,7 @@ margin_left = 241.0
 margin_top = 12.0
 margin_right = 265.0
 margin_bottom = 177.0
-texture = SubResource( 7 )
+texture = SubResource( 12 )
 expand = true
 
 [node name="TX_4" type="TextureRect" parent="MAIN/MENUS/ACTBOX/BGTEX/TXGRP_2"]
@@ -870,7 +998,7 @@ margin_left = 612.0
 margin_top = 12.0
 margin_right = 636.0
 margin_bottom = 177.0
-texture = SubResource( 8 )
+texture = SubResource( 13 )
 expand = true
 
 [node name="INPUT" type="Control" parent="MAIN/MENUS/ACTBOX"]
@@ -887,7 +1015,7 @@ margin_left = 265.0
 margin_top = 32.0
 margin_right = 455.0
 margin_bottom = 82.0
-texture_hover = SubResource( 19 )
+texture_hover = SubResource( 21 )
 
 [node name="TXT" type="RichTextLabel" parent="MAIN/MENUS/ACTBOX/INPUT/BTN1"]
 margin_left = 32.0
@@ -905,7 +1033,7 @@ margin_left = 455.0
 margin_top = 32.0
 margin_right = 562.0
 margin_bottom = 82.0
-texture_hover = SubResource( 19 )
+texture_hover = SubResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -929,7 +1057,7 @@ margin_left = 265.0
 margin_top = 96.0
 margin_right = 450.0
 margin_bottom = 139.0
-texture_hover = SubResource( 19 )
+texture_hover = SubResource( 21 )
 
 [node name="TXT" type="RichTextLabel" parent="MAIN/MENUS/ACTBOX/INPUT/BTN3"]
 margin_left = 32.0
@@ -947,7 +1075,7 @@ margin_left = 456.0
 margin_top = 96.0
 margin_right = 595.0
 margin_bottom = 142.0
-texture_hover = SubResource( 19 )
+texture_hover = SubResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1004,7 +1132,7 @@ margin_left = 145.0
 margin_top = -16.0
 margin_right = 173.0
 margin_bottom = 12.0
-texture = SubResource( 1 )
+texture = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1014,21 +1142,21 @@ margin_left = 612.0
 margin_top = -16.0
 margin_right = 640.0
 margin_bottom = 12.0
-texture = SubResource( 2 )
+texture = SubResource( 7 )
 
 [node name="TX_3" type="TextureRect" parent="MAIN/MENUS/BTLBOX/ACTBOX/BGTEX/TXGRP_1"]
 margin_left = 145.0
 margin_top = 176.0
 margin_right = 173.0
 margin_bottom = 204.0
-texture = SubResource( 3 )
+texture = SubResource( 8 )
 
 [node name="TX_4" type="TextureRect" parent="MAIN/MENUS/BTLBOX/ACTBOX/BGTEX/TXGRP_1"]
 margin_left = 612.116
 margin_top = 176.0
 margin_right = 640.116
 margin_bottom = 204.0
-texture = SubResource( 4 )
+texture = SubResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1045,7 +1173,7 @@ margin_left = 178.0
 margin_top = -12.0
 margin_right = 612.0
 margin_bottom = 12.0
-texture = SubResource( 5 )
+texture = SubResource( 10 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1056,7 +1184,7 @@ margin_left = 177.0
 margin_top = 176.0
 margin_right = 612.0
 margin_bottom = 200.0
-texture = SubResource( 6 )
+texture = SubResource( 11 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1067,7 +1195,7 @@ margin_left = 153.0
 margin_top = 12.0
 margin_right = 177.0
 margin_bottom = 177.0
-texture = SubResource( 7 )
+texture = SubResource( 12 )
 expand = true
 
 [node name="TX_4" type="TextureRect" parent="MAIN/MENUS/BTLBOX/ACTBOX/BGTEX/TXGRP_2"]
@@ -1075,7 +1203,7 @@ margin_left = 612.0
 margin_top = 12.0
 margin_right = 636.0
 margin_bottom = 177.0
-texture = SubResource( 8 )
+texture = SubResource( 13 )
 expand = true
 
 [node name="INPUT" type="Control" parent="MAIN/MENUS/BTLBOX/ACTBOX"]
@@ -1093,7 +1221,7 @@ margin_top = 3.0
 margin_right = 359.0
 margin_bottom = 42.0
 disabled = true
-texture_hover = SubResource( 19 )
+texture_hover = SubResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1116,7 +1244,7 @@ margin_top = 43.0
 margin_right = 359.0
 margin_bottom = 82.0
 disabled = true
-texture_hover = SubResource( 19 )
+texture_hover = SubResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1139,7 +1267,7 @@ margin_top = 83.0
 margin_right = 359.0
 margin_bottom = 122.0
 disabled = true
-texture_hover = SubResource( 19 )
+texture_hover = SubResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1162,7 +1290,7 @@ margin_top = 123.0
 margin_right = 359.0
 margin_bottom = 162.0
 disabled = true
-texture_hover = SubResource( 19 )
+texture_hover = SubResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1186,6 +1314,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="BGCOLOR" type="ColorRect" parent="MAIN/MENUS/BTLBOX/INFBOX"]
+margin_left = 28.0
+margin_top = -106.0
+margin_right = 357.0
+margin_bottom = -1.0
+
 [node name="BGTEX" type="Control" parent="MAIN/MENUS/BTLBOX/INFBOX"]
 margin_left = -1.0
 margin_top = 16.0
@@ -1206,7 +1340,7 @@ __meta__ = {
 margin_top = -148.0
 margin_right = 28.0
 margin_bottom = -120.0
-texture = SubResource( 1 )
+texture = SubResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1216,20 +1350,20 @@ margin_left = 355.0
 margin_top = -148.0
 margin_right = 383.0
 margin_bottom = -120.0
-texture = SubResource( 2 )
+texture = SubResource( 7 )
 
 [node name="TX_3" type="TextureRect" parent="MAIN/MENUS/BTLBOX/INFBOX/BGTEX/TXGRP_1"]
 margin_top = -20.0
 margin_right = 28.0
 margin_bottom = 8.0
-texture = SubResource( 3 )
+texture = SubResource( 8 )
 
 [node name="TX_4" type="TextureRect" parent="MAIN/MENUS/BTLBOX/INFBOX/BGTEX/TXGRP_1"]
 margin_left = 355.116
 margin_top = -20.0
 margin_right = 383.116
 margin_bottom = 8.0
-texture = SubResource( 4 )
+texture = SubResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1246,7 +1380,7 @@ margin_left = 28.0
 margin_top = -144.0
 margin_right = 355.0
 margin_bottom = -120.0
-texture = SubResource( 5 )
+texture = SubResource( 10 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1257,7 +1391,7 @@ margin_left = 32.0
 margin_top = -20.0
 margin_right = 355.0
 margin_bottom = 4.0
-texture = SubResource( 6 )
+texture = SubResource( 11 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1268,7 +1402,7 @@ margin_left = 8.0
 margin_top = -121.0
 margin_right = 32.0
 margin_bottom = -19.0
-texture = SubResource( 7 )
+texture = SubResource( 12 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1279,7 +1413,7 @@ margin_left = 355.0
 margin_top = -120.0
 margin_right = 379.0
 margin_bottom = -20.0
-texture = SubResource( 8 )
+texture = SubResource( 13 )
 expand = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1336,6 +1470,774 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="POKBOX" type="Control" parent="MAIN/MENUS"]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BGRECT" type="ColorRect" parent="MAIN/MENUS/POKBOX"]
+margin_right = 640.0
+margin_bottom = 576.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="INFBOX" type="Control" parent="MAIN/MENUS/POKBOX"]
+visible = false
+margin_left = 1.0
+margin_top = 357.0
+margin_right = 641.0
+margin_bottom = 576.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BGTEX" type="Control" parent="MAIN/MENUS/POKBOX/INFBOX"]
+margin_left = -1.0
+margin_top = 16.0
+margin_right = 39.0
+margin_bottom = 56.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXGRP_1" type="Control" parent="MAIN/MENUS/POKBOX/INFBOX/BGTEX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_1" type="TextureRect" parent="MAIN/MENUS/POKBOX/INFBOX/BGTEX/TXGRP_1"]
+margin_top = 16.0
+margin_right = 28.0
+margin_bottom = 44.0
+texture = SubResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_2" type="TextureRect" parent="MAIN/MENUS/POKBOX/INFBOX/BGTEX/TXGRP_1"]
+margin_left = 612.0
+margin_top = 16.0
+margin_right = 640.0
+margin_bottom = 44.0
+texture = SubResource( 7 )
+
+[node name="TX_3" type="TextureRect" parent="MAIN/MENUS/POKBOX/INFBOX/BGTEX/TXGRP_1"]
+margin_top = 176.0
+margin_right = 28.0
+margin_bottom = 204.0
+texture = SubResource( 8 )
+
+[node name="TX_4" type="TextureRect" parent="MAIN/MENUS/POKBOX/INFBOX/BGTEX/TXGRP_1"]
+margin_left = 612.116
+margin_top = 176.0
+margin_right = 640.116
+margin_bottom = 204.0
+texture = SubResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TXGRP_2" type="Control" parent="MAIN/MENUS/POKBOX/INFBOX/BGTEX"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_1" type="TextureRect" parent="MAIN/MENUS/POKBOX/INFBOX/BGTEX/TXGRP_2"]
+margin_left = 28.0
+margin_top = 20.0
+margin_right = 612.0
+margin_bottom = 44.0
+texture = SubResource( 10 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_2" type="TextureRect" parent="MAIN/MENUS/POKBOX/INFBOX/BGTEX/TXGRP_2"]
+margin_left = 28.0
+margin_top = 176.0
+margin_right = 612.0
+margin_bottom = 200.0
+texture = SubResource( 11 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_3" type="TextureRect" parent="MAIN/MENUS/POKBOX/INFBOX/BGTEX/TXGRP_2"]
+margin_left = 8.0
+margin_top = 42.0
+margin_right = 32.0
+margin_bottom = 177.0
+texture = SubResource( 12 )
+expand = true
+
+[node name="TX_4" type="TextureRect" parent="MAIN/MENUS/POKBOX/INFBOX/BGTEX/TXGRP_2"]
+margin_left = 612.0
+margin_top = 44.0
+margin_right = 636.0
+margin_bottom = 177.0
+texture = SubResource( 13 )
+expand = true
+
+[node name="TEXT" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INFBOX"]
+margin_left = 32.0
+margin_top = 60.0
+margin_right = 611.0
+margin_bottom = 191.0
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+text = "Choose a POKEMON."
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="INPUT" type="Control" parent="MAIN/MENUS/POKBOX"]
+visible = false
+margin_left = -191.56
+margin_top = -160.0
+margin_right = -151.56
+margin_bottom = -120.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="POKESEL1" type="TextureButton" parent="MAIN/MENUS/POKBOX/INPUT"]
+margin_left = 190.56
+margin_top = 156.0
+margin_right = 830.56
+margin_bottom = 235.0
+texture_hover = SubResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NOCONNECT" type="Control" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL1"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_01" type="TextureRect" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL1/NOCONNECT"]
+margin_left = 147.44
+margin_top = 51.0
+margin_right = 191.44
+margin_bottom = 67.0
+mouse_filter = 2
+texture = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_02" type="TextureRect" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL1/NOCONNECT"]
+margin_left = 442.0
+margin_top = 16.0
+margin_right = 467.0
+margin_bottom = 36.0
+mouse_filter = 2
+texture = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="POKE" type="Sprite" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL1"]
+position = Vector2( 78, 40 )
+texture = ExtResource( 10 )
+vframes = 10
+hframes = 2
+
+[node name="NAME" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL1"]
+margin_left = 110.0
+margin_top = 8.0
+margin_right = 446.0
+margin_bottom = 48.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "MISSINGNO."
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HPBAR" type="TextureProgress" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL1"]
+margin_left = 206.44
+margin_top = 51.0
+margin_right = 406.44
+margin_bottom = 67.0
+mouse_filter = 2
+texture_under = SubResource( 4 )
+texture_progress = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VALUE" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL1"]
+margin_left = 383.44
+margin_top = 36.0
+margin_right = 642.44
+margin_bottom = 75.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[right]255/255[/right]"
+text = "255/255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LEVEL" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL1"]
+margin_left = 470.0
+margin_top = 4.0
+margin_right = 566.0
+margin_bottom = 43.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="POKESEL2" type="TextureButton" parent="MAIN/MENUS/POKBOX/INPUT"]
+visible = false
+margin_left = 190.56
+margin_top = 220.0
+margin_right = 830.56
+margin_bottom = 299.0
+texture_hover = SubResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NOCONNECT" type="Control" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL2"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_01" type="TextureRect" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL2/NOCONNECT"]
+margin_left = 147.44
+margin_top = 51.0
+margin_right = 191.44
+margin_bottom = 67.0
+mouse_filter = 2
+texture = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_02" type="TextureRect" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL2/NOCONNECT"]
+margin_left = 442.0
+margin_top = 16.0
+margin_right = 467.0
+margin_bottom = 36.0
+mouse_filter = 2
+texture = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="POKE" type="Sprite" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL2"]
+position = Vector2( 78, 40 )
+texture = ExtResource( 10 )
+vframes = 10
+hframes = 2
+frame = 1
+
+[node name="NAME" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL2"]
+margin_left = 110.0
+margin_top = 8.0
+margin_right = 446.0
+margin_bottom = 48.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "MISSINGNO."
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HPBAR" type="TextureProgress" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL2"]
+margin_left = 206.44
+margin_top = 51.0
+margin_right = 406.44
+margin_bottom = 67.0
+mouse_filter = 2
+texture_under = SubResource( 4 )
+texture_progress = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VALUE" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL2"]
+margin_left = 383.44
+margin_top = 36.0
+margin_right = 642.44
+margin_bottom = 75.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[right]255/255[/right]"
+text = "255/255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LEVEL" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL2"]
+margin_left = 470.0
+margin_top = 4.0
+margin_right = 566.0
+margin_bottom = 43.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="POKESEL3" type="TextureButton" parent="MAIN/MENUS/POKBOX/INPUT"]
+visible = false
+margin_left = 190.56
+margin_top = 284.0
+margin_right = 830.56
+margin_bottom = 363.0
+texture_hover = SubResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NOCONNECT" type="Control" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL3"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_01" type="TextureRect" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL3/NOCONNECT"]
+margin_left = 147.44
+margin_top = 51.0
+margin_right = 191.44
+margin_bottom = 67.0
+mouse_filter = 2
+texture = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_02" type="TextureRect" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL3/NOCONNECT"]
+margin_left = 442.0
+margin_top = 16.0
+margin_right = 467.0
+margin_bottom = 36.0
+mouse_filter = 2
+texture = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="POKE" type="Sprite" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL3"]
+position = Vector2( 78, 40 )
+texture = ExtResource( 10 )
+vframes = 10
+hframes = 2
+frame = 1
+
+[node name="NAME" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL3"]
+margin_left = 110.0
+margin_top = 8.0
+margin_right = 446.0
+margin_bottom = 48.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "MISSINGNO."
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HPBAR" type="TextureProgress" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL3"]
+margin_left = 206.44
+margin_top = 51.0
+margin_right = 406.44
+margin_bottom = 67.0
+mouse_filter = 2
+texture_under = SubResource( 4 )
+texture_progress = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VALUE" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL3"]
+margin_left = 383.44
+margin_top = 36.0
+margin_right = 642.44
+margin_bottom = 75.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[right]255/255[/right]"
+text = "255/255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LEVEL" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL3"]
+margin_left = 470.0
+margin_top = 4.0
+margin_right = 566.0
+margin_bottom = 43.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="POKESEL4" type="TextureButton" parent="MAIN/MENUS/POKBOX/INPUT"]
+visible = false
+margin_left = 190.56
+margin_top = 348.0
+margin_right = 830.56
+margin_bottom = 427.0
+texture_hover = SubResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NOCONNECT" type="Control" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL4"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_01" type="TextureRect" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL4/NOCONNECT"]
+margin_left = 147.44
+margin_top = 51.0
+margin_right = 191.44
+margin_bottom = 67.0
+mouse_filter = 2
+texture = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_02" type="TextureRect" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL4/NOCONNECT"]
+margin_left = 442.0
+margin_top = 16.0
+margin_right = 467.0
+margin_bottom = 36.0
+mouse_filter = 2
+texture = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="POKE" type="Sprite" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL4"]
+position = Vector2( 78, 40 )
+texture = ExtResource( 10 )
+vframes = 10
+hframes = 2
+frame = 1
+
+[node name="NAME" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL4"]
+margin_left = 110.0
+margin_top = 8.0
+margin_right = 446.0
+margin_bottom = 48.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "MISSINGNO."
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HPBAR" type="TextureProgress" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL4"]
+margin_left = 206.44
+margin_top = 51.0
+margin_right = 406.44
+margin_bottom = 67.0
+mouse_filter = 2
+texture_under = SubResource( 4 )
+texture_progress = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VALUE" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL4"]
+margin_left = 383.44
+margin_top = 36.0
+margin_right = 642.44
+margin_bottom = 75.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[right]255/255[/right]"
+text = "255/255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LEVEL" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL4"]
+margin_left = 470.0
+margin_top = 4.0
+margin_right = 566.0
+margin_bottom = 43.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="POKESEL5" type="TextureButton" parent="MAIN/MENUS/POKBOX/INPUT"]
+visible = false
+margin_left = 190.56
+margin_top = 412.0
+margin_right = 830.56
+margin_bottom = 491.0
+texture_hover = SubResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NOCONNECT" type="Control" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL5"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_01" type="TextureRect" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL5/NOCONNECT"]
+margin_left = 147.44
+margin_top = 51.0
+margin_right = 191.44
+margin_bottom = 67.0
+mouse_filter = 2
+texture = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_02" type="TextureRect" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL5/NOCONNECT"]
+margin_left = 442.0
+margin_top = 16.0
+margin_right = 467.0
+margin_bottom = 36.0
+mouse_filter = 2
+texture = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="POKE" type="Sprite" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL5"]
+position = Vector2( 78, 40 )
+texture = ExtResource( 10 )
+vframes = 10
+hframes = 2
+frame = 1
+
+[node name="NAME" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL5"]
+margin_left = 110.0
+margin_top = 8.0
+margin_right = 446.0
+margin_bottom = 48.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "MISSINGNO."
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HPBAR" type="TextureProgress" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL5"]
+margin_left = 206.44
+margin_top = 51.0
+margin_right = 406.44
+margin_bottom = 67.0
+mouse_filter = 2
+texture_under = SubResource( 4 )
+texture_progress = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VALUE" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL5"]
+margin_left = 383.44
+margin_top = 36.0
+margin_right = 642.44
+margin_bottom = 75.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[right]255/255[/right]"
+text = "255/255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LEVEL" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL5"]
+margin_left = 470.0
+margin_top = 4.0
+margin_right = 566.0
+margin_bottom = 43.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="POKESEL6" type="TextureButton" parent="MAIN/MENUS/POKBOX/INPUT"]
+visible = false
+margin_left = 190.56
+margin_top = 476.0
+margin_right = 830.56
+margin_bottom = 555.0
+texture_hover = SubResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NOCONNECT" type="Control" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL6"]
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_01" type="TextureRect" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL6/NOCONNECT"]
+margin_left = 147.44
+margin_top = 51.0
+margin_right = 191.44
+margin_bottom = 67.0
+mouse_filter = 2
+texture = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TX_02" type="TextureRect" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL6/NOCONNECT"]
+margin_left = 442.0
+margin_top = 16.0
+margin_right = 467.0
+margin_bottom = 36.0
+mouse_filter = 2
+texture = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="POKE" type="Sprite" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL6"]
+position = Vector2( 78, 40 )
+texture = ExtResource( 10 )
+vframes = 10
+hframes = 2
+frame = 1
+
+[node name="NAME" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL6"]
+margin_left = 110.0
+margin_top = 8.0
+margin_right = 446.0
+margin_bottom = 48.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "MISSINGNO."
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HPBAR" type="TextureProgress" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL6"]
+margin_left = 206.44
+margin_top = 51.0
+margin_right = 406.44
+margin_bottom = 67.0
+mouse_filter = 2
+texture_under = SubResource( 4 )
+texture_progress = SubResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VALUE" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL6"]
+margin_left = 383.44
+margin_top = 36.0
+margin_right = 642.44
+margin_bottom = 75.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+bbcode_enabled = true
+bbcode_text = "[right]255/255[/right]"
+text = "255/255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LEVEL" type="RichTextLabel" parent="MAIN/MENUS/POKBOX/INPUT/POKESEL6"]
+margin_left = 470.0
+margin_top = 4.0
+margin_right = 566.0
+margin_bottom = 43.0
+mouse_filter = 2
+custom_fonts/normal_font = ExtResource( 3 )
+custom_colors/default_color = Color( 0, 0, 0, 1 )
+text = "255"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="POKEANIM" type="AnimationPlayer" parent="MAIN/MENUS/POKBOX"]
+playback_speed = 2.0
+anims/POKEPLAY = SubResource( 24 )
+
 [node name="FRAMERECT" type="TextureRect" parent="MAIN"]
 margin_left = -512.0
 margin_right = 1536.0
@@ -1349,12 +2251,15 @@ __meta__ = {
 [node name="ENGINES" type="Node" parent="."]
 
 [node name="ANIM" type="AnimationPlayer" parent="ENGINES"]
-anims/BTLINIT = SubResource( 14 )
-anims/ESEND = SubResource( 15 )
-anims/ESLIDE = SubResource( 16 )
-anims/INITMENU = SubResource( 20 )
-anims/PSEND = SubResource( 17 )
-anims/PSLIDE = SubResource( 18 )
+anims/BTLINIT = SubResource( 15 )
+anims/ESEND = SubResource( 16 )
+anims/ESLIDE = SubResource( 17 )
+anims/INITMENU = SubResource( 18 )
+anims/NORUN = SubResource( 23 )
+anims/PCALL = SubResource( 25 )
+anims/PKMNINIT = SubResource( 22 )
+anims/PSEND = SubResource( 19 )
+anims/PSLIDE = SubResource( 20 )
 
 [node name="MUSIC" type="AudioStreamPlayer" parent="ENGINES"]
-stream = ExtResource( 10 )
+volume_db = -15.0

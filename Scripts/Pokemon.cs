@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class Pokemon
 {
 	static Move TACKLE = new Move(0, 0x0A, 35, 40, 100, 0);
-	static Move POUND = new Move(1, 0x0A, 35, 40, 100, 0);
+	static Move POUND = new Move(1, 0x0A, 50, 40, 100, 0);
 	
 	public List<Move> Moveset = new List<Move> { TACKLE, POUND };
 	public List<byte> IVArray;

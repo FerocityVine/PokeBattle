@@ -15,8 +15,8 @@ public class RNDSCENE : Node2D
 	byte MaxPokemon = 6;
 	byte MinPokemon = 1;
 	
-	byte MaxLevel = 12;
-	byte MinLevel = 6;
+	byte MaxLevel = 53;
+	byte MinLevel = 32;
 	
 	byte MaxSpecies = 9;
 	
