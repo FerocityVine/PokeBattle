@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=42 format=2]
 
 [ext_resource path="res://Assets/FRAME.png" type="Texture" id=1]
 [ext_resource path="res://Assets/HUDTEXT.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Assets/BALLEMPTY.png" type="Texture" id=8]
 [ext_resource path="res://Assets/BALLFULL.png" type="Texture" id=9]
 [ext_resource path="res://Assets/MENUSPRITE.png" type="Texture" id=10]
+[ext_resource path="res://Assets/BATTLE.wav" type="AudioStream" id=11]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -63,15 +64,15 @@ region = Rect2( 8, 64, 24, 32 )
 atlas = ExtResource( 2 )
 region = Rect2( 128, 64, 24, 32 )
 
-[sub_resource type="AtlasTexture" id=21]
+[sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 2 )
 region = Rect2( 500, 96, 20, 28 )
 
-[sub_resource type="AtlasTexture" id=14]
+[sub_resource type="AtlasTexture" id=15]
 atlas = ExtResource( 2 )
 region = Rect2( 500, 80, 20, 60 )
 
-[sub_resource type="Animation" id=24]
+[sub_resource type="Animation" id=16]
 resource_name = "POKEPLAY"
 loop = true
 tracks/0/type = "value"
@@ -99,7 +100,7 @@ tracks/1/keys = {
 "values": [ 2.0 ]
 }
 
-[sub_resource type="Animation" id=15]
+[sub_resource type="Animation" id=17]
 length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/TRAINER/ENEMY:position")
@@ -186,7 +187,71 @@ tracks/6/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=16]
+[sub_resource type="Animation" id=18]
+resource_name = "EATTACK"
+length = 3.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ "", "Foe MISSINGNO. used MISSINGNO.!" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../MAIN/POKEMON/ENEMY:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.2, 1.3, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 712, 251 ), Vector2( 688, 251 ), Vector2( 712, 251 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../MAIN/POKEMON/PLAYER:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 1.5, 1.6, 1.7, 1.8, 1.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../MAIN/BARS/PLAYER/VALUE:value")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 2, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../MAIN/BARS/PLAYER/HEALTH:bbcode_text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "[right]255/255[/right]" ]
+}
+
+[sub_resource type="Animation" id=20]
 length = 2.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
@@ -225,7 +290,7 @@ tracks/2/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=17]
+[sub_resource type="Animation" id=21]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/TRAINER/ENEMY:position")
@@ -264,8 +329,82 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=18]
-resource_name = "INITMENU"
+[sub_resource type="Animation" id=22]
+length = 8.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.69, 1.7, 2.5, 4.99, 5, 6.99, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ "", "Foe MISSINGNO. is out of usable moves.", "Foe MISSINGNO. is out of usable moves.", "", "Foe MISSINGNO. used STRUGGLE!", "Foe MISSINGNO. used STRUGGLE!", "", "", "Foe MISSINGNO. got hurt by recoil!" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../MAIN/POKEMON/ENEMY:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 2.7, 2.8, 2.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 712, 251 ), Vector2( 688, 251 ), Vector2( 712, 251 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../MAIN/POKEMON/PLAYER:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 3, 3.1, 3.2, 3.3, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../MAIN/BARS/PLAYER/VALUE:value")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 3.5, 4.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../MAIN/BARS/ENEMY/VALUE:value")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 5, 6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../MAIN/BARS/PLAYER/HEALTH:bbcode_text")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 4.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "[right]255/255[/right]" ]
+}
+
+[sub_resource type="Animation" id=23]
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
 tracks/0/interp = 1
@@ -291,8 +430,24 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=23]
-resource_name = "NORUN"
+[sub_resource type="Animation" id=19]
+resource_name = "MISS"
+length = 2.8
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.5, 1.51, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ "", "Foe MISSINGNO. used MISSINGNO.!", "Foe MISSINGNO. used MISSINGNO.!", "", "Foe MISSINGNO.'s attack missed!" ]
+}
+
+[sub_resource type="Animation" id=24]
 length = 1.75
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/MENUS/ACTBOX:visible")
@@ -319,8 +474,59 @@ tracks/1/keys = {
 "values": [ "", "Cannot run from a trainer battle." ]
 }
 
+[sub_resource type="Animation" id=30]
+resource_name = "PATTACK"
+length = 3.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ "", "Foe MISSINGNO. used MISSINGNO.!" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../MAIN/POKEMON/ENEMY:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5, 1.6, 1.7, 1.8, 1.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../MAIN/BARS/ENEMY/VALUE:value")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 2, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../MAIN/POKEMON/PLAYER:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 1.2, 1.3, 1.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 336, 392 ), Vector2( 360, 392 ), Vector2( 336, 392 ) ]
+}
+
 [sub_resource type="Animation" id=25]
-resource_name = "PCALL"
 length = 2.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
@@ -359,8 +565,7 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
-[sub_resource type="Animation" id=22]
-resource_name = "PKMNINIT"
+[sub_resource type="Animation" id=26]
 length = 0.5
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/MENUS/POKBOX/INFBOX:visible")
@@ -387,7 +592,7 @@ tracks/1/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=19]
+[sub_resource type="Animation" id=27]
 length = 2.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
@@ -426,7 +631,7 @@ tracks/2/keys = {
 "values": [ false, true ]
 }
 
-[sub_resource type="Animation" id=20]
+[sub_resource type="Animation" id=28]
 length = 0.4
 tracks/0/type = "value"
 tracks/0/path = NodePath("../MAIN/TRAINER/PLAYER:position")
@@ -451,6 +656,82 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "PSTRUGGLE"
+length = 8.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("../MAIN/MENUS/INFBOX/TEXT:text")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 1.69, 1.7, 2.5, 4.99, 5, 6.99, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ "", "Foe MISSINGNO. is out of usable moves.", "Foe MISSINGNO. is out of usable moves.", "", "Foe MISSINGNO. used STRUGGLE!", "Foe MISSINGNO. used STRUGGLE!", "", "", "Foe MISSINGNO. got hurt by recoil!" ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../MAIN/POKEMON/ENEMY:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 3, 3.1, 3.2, 3.3, 3.4 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true, false, true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../MAIN/BARS/PLAYER/VALUE:value")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 5, 6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../MAIN/BARS/ENEMY/VALUE:value")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 3.5, 4.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("../MAIN/BARS/PLAYER/HEALTH:bbcode_text")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 4.5 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "[right]255/255[/right]" ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("../MAIN/POKEMON/PLAYER:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 2.7, 2.8, 2.9 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 336, 392 ), Vector2( 360, 392 ), Vector2( 336, 392 ) ]
 }
 
 [node name="BTLSCENE" type="Node2D"]
@@ -890,7 +1171,7 @@ margin_bottom = 191.0
 custom_fonts/normal_font = ExtResource( 3 )
 custom_colors/default_color = Color( 0, 0, 0, 1 )
 bbcode_enabled = true
-visible_characters = 0
+visible_characters = 5
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -1015,7 +1296,7 @@ margin_left = 265.0
 margin_top = 32.0
 margin_right = 455.0
 margin_bottom = 82.0
-texture_hover = SubResource( 21 )
+texture_hover = SubResource( 14 )
 
 [node name="TXT" type="RichTextLabel" parent="MAIN/MENUS/ACTBOX/INPUT/BTN1"]
 margin_left = 32.0
@@ -1033,7 +1314,7 @@ margin_left = 455.0
 margin_top = 32.0
 margin_right = 562.0
 margin_bottom = 82.0
-texture_hover = SubResource( 21 )
+texture_hover = SubResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1057,7 +1338,7 @@ margin_left = 265.0
 margin_top = 96.0
 margin_right = 450.0
 margin_bottom = 139.0
-texture_hover = SubResource( 21 )
+texture_hover = SubResource( 14 )
 
 [node name="TXT" type="RichTextLabel" parent="MAIN/MENUS/ACTBOX/INPUT/BTN3"]
 margin_left = 32.0
@@ -1075,7 +1356,7 @@ margin_left = 456.0
 margin_top = 96.0
 margin_right = 595.0
 margin_bottom = 142.0
-texture_hover = SubResource( 21 )
+texture_hover = SubResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1221,7 +1502,7 @@ margin_top = 3.0
 margin_right = 359.0
 margin_bottom = 42.0
 disabled = true
-texture_hover = SubResource( 21 )
+texture_hover = SubResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1244,7 +1525,7 @@ margin_top = 43.0
 margin_right = 359.0
 margin_bottom = 82.0
 disabled = true
-texture_hover = SubResource( 21 )
+texture_hover = SubResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1267,7 +1548,7 @@ margin_top = 83.0
 margin_right = 359.0
 margin_bottom = 122.0
 disabled = true
-texture_hover = SubResource( 21 )
+texture_hover = SubResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1290,7 +1571,7 @@ margin_top = 123.0
 margin_right = 359.0
 margin_bottom = 162.0
 disabled = true
-texture_hover = SubResource( 21 )
+texture_hover = SubResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1617,7 +1898,7 @@ margin_left = 190.56
 margin_top = 156.0
 margin_right = 830.56
 margin_bottom = 235.0
-texture_hover = SubResource( 14 )
+texture_hover = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1720,7 +2001,7 @@ margin_left = 190.56
 margin_top = 220.0
 margin_right = 830.56
 margin_bottom = 299.0
-texture_hover = SubResource( 14 )
+texture_hover = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1824,7 +2105,7 @@ margin_left = 190.56
 margin_top = 284.0
 margin_right = 830.56
 margin_bottom = 363.0
-texture_hover = SubResource( 14 )
+texture_hover = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -1928,7 +2209,7 @@ margin_left = 190.56
 margin_top = 348.0
 margin_right = 830.56
 margin_bottom = 427.0
-texture_hover = SubResource( 14 )
+texture_hover = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -2032,7 +2313,7 @@ margin_left = 190.56
 margin_top = 412.0
 margin_right = 830.56
 margin_bottom = 491.0
-texture_hover = SubResource( 14 )
+texture_hover = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -2136,7 +2417,7 @@ margin_left = 190.56
 margin_top = 476.0
 margin_right = 830.56
 margin_bottom = 555.0
-texture_hover = SubResource( 14 )
+texture_hover = SubResource( 15 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -2236,7 +2517,7 @@ __meta__ = {
 
 [node name="POKEANIM" type="AnimationPlayer" parent="MAIN/MENUS/POKBOX"]
 playback_speed = 2.0
-anims/POKEPLAY = SubResource( 24 )
+anims/POKEPLAY = SubResource( 16 )
 
 [node name="FRAMERECT" type="TextureRect" parent="MAIN"]
 margin_left = -512.0
@@ -2251,15 +2532,21 @@ __meta__ = {
 [node name="ENGINES" type="Node" parent="."]
 
 [node name="ANIM" type="AnimationPlayer" parent="ENGINES"]
-anims/BTLINIT = SubResource( 15 )
-anims/ESEND = SubResource( 16 )
-anims/ESLIDE = SubResource( 17 )
-anims/INITMENU = SubResource( 18 )
-anims/NORUN = SubResource( 23 )
+anims/BTLINIT = SubResource( 17 )
+anims/EATTACK = SubResource( 18 )
+anims/ESEND = SubResource( 20 )
+anims/ESLIDE = SubResource( 21 )
+anims/ESTRUGGLE = SubResource( 22 )
+anims/INITMENU = SubResource( 23 )
+anims/MISS = SubResource( 19 )
+anims/NORUN = SubResource( 24 )
+anims/PATTACK = SubResource( 30 )
 anims/PCALL = SubResource( 25 )
-anims/PKMNINIT = SubResource( 22 )
-anims/PSEND = SubResource( 19 )
-anims/PSLIDE = SubResource( 20 )
+anims/PKMNINIT = SubResource( 26 )
+anims/PSEND = SubResource( 27 )
+anims/PSLIDE = SubResource( 28 )
+anims/PSTRUGGLE = SubResource( 29 )
 
 [node name="MUSIC" type="AudioStreamPlayer" parent="ENGINES"]
+stream = ExtResource( 11 )
 volume_db = -15.0

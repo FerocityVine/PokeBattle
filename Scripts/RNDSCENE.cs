@@ -12,11 +12,11 @@ public class RNDSCENE : Node2D
 	
 	// RNG-Manuplation Factors //
 	
-	byte MaxPokemon = 6;
-	byte MinPokemon = 1;
+	byte MaxPokemon = 2;
+	byte MinPokemon = 2;
 	
-	byte MaxLevel = 53;
-	byte MinLevel = 32;
+	byte MaxLevel = 5;
+	byte MinLevel = 1;
 	
 	byte MaxSpecies = 9;
 	
@@ -58,7 +58,7 @@ public class RNDSCENE : Node2D
 	
 	public override void _Ready()
 	{
-		OS.SetWindowTitle("PokéFight v0.1 - PoC by FerocityVine");
+		OS.SetWindowTitle("PokéFight v0.5 - [FerocityVine]");
 		
 		AnimPlayer = GetNode("ENGINES/ANIM") as AnimationPlayer;
 		MusicPlayer = GetNode("ENGINES/MUSIC") as AudioStreamPlayer;

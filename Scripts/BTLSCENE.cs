@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+using System.Linq;
 using System.Collections.Generic;
 
 public class BTLSCENE : Node2D
@@ -42,6 +43,10 @@ public class BTLSCENE : Node2D
 	bool ECalling = false;
 	
 	byte PrevHighlight = 0;
+	
+	bool ProcessBool = false;
+	int Processing = 0;
+	int PAttackIndex = 0;
 	
 	Pokemon EPokemon;
 	Pokemon PPokemon;
@@ -85,6 +90,7 @@ public class BTLSCENE : Node2D
 		{
 			ACTIONS.Add(ActionBox.GetNode(string.Format("INPUT/BTN{0}", i + 1)) as TextureButton);
 			ATTACKS.Add(BattleBox.GetNode(string.Format("ACTBOX/INPUT/BTN{0}", i + 1)) as TextureButton);
+			ATTACKS[i].Connect("pressed", this, "AttackSelect", new Godot.Collections.Array() {ATTACKS[i]});
 		}
 		
 		for (int i = 0; i < 6; i++)
@@ -126,8 +132,23 @@ public class BTLSCENE : Node2D
 			PCalling = true;
 			
 			AnimPlayer.Queue("PSEND");
-			ProcessEnemy();
+			Processing = 1;
 		}
+	}
+	
+	public void AttackSelect(Node SomeNode)
+	{
+		BattleBox.Visible = false;
+		
+		string SomePath = SomeNode.GetPath();
+		SomePath = SomePath.Replace("/root/BTLSCENE/MAIN/MENUS/BTLBOX/ACTBOX/INPUT/BTN", "");
+		PAttackIndex = int.Parse(SomePath) - 1;
+		
+		if (EPokemon.Stats[3] > PPokemon.Stats[3])
+			Processing = 3;
+		
+		else
+		Processing = 4;
 	}
 	
 	public void ExecuteMenus()
@@ -165,8 +186,8 @@ public class BTLSCENE : Node2D
 				LEVEL.Text = Current.Level.ToString();
 				VALUE.BbcodeText = string.Format("[right]{0}/{1}[/right]", Current.HP, Current.Stats[0]);
 				
-				HPBAR.Value = Current.HP;
-				HPBAR.MaxValue = Current.Stats[0];
+				HPBAR.Value = ((float)Current.HP / (float)Current.Stats[0]) * 100F;
+				HPBAR.MaxValue = 100;
 				
 				POKESELECT[i].Visible = true;
 			}
@@ -225,13 +246,15 @@ public class BTLSCENE : Node2D
 		ESEND.TrackInsertKey(0, 1, string.Format("$% TRAINER sent out {0}!", Pokemon.PokeNames[EPSprite.Frame]));
 		
 		ELevel.Text = EPokemon.Level.ToString();
-		EHealth.MaxValue = EPokemon.Stats[0];
-		EHealth.Value = EPokemon.HP;
+		EHealth.MaxValue = 100;
+		EHealth.Value = ((float)EPokemon.HP / (float)EPokemon.Stats[0]) * 100F;
 		EName.Text = Pokemon.PokeNames[EPokemon.Species];
 	}
 	
 	public void InitPlayer()
 	{
+		PCalling = false;
+		
 		PPokemon = GlobalVars.Player.Party[PIndex];
 		PPSprite.Frame = PPokemon.Species;
 		PBalls.RectSize = new Vector2(35 * GlobalVars.Player.Party.Count, 35);
@@ -243,8 +266,8 @@ public class BTLSCENE : Node2D
 		PCALL.TrackInsertKey(0, 1, string.Format("That's enough, {0}. Come back!", Pokemon.PokeNames[PPSprite.Frame]));
 		
 		PLevel.Text = PPokemon.Level.ToString();
-		PHealth.MaxValue = PPokemon.Stats[0];
-		PHealth.Value = PPokemon.HP;
+		PHealth.MaxValue = 100;
+		PHealth.Value = ((float)PPokemon.HP / (float)PPokemon.Stats[0]) * 100F;
 		PName.Text = Pokemon.PokeNames[PPokemon.Species];
 		PHPText.BbcodeText = string.Format("[right]{0}/{1}[/right]", PPokemon.HP, PPokemon.Stats[0]);
 		
@@ -273,7 +296,243 @@ public class BTLSCENE : Node2D
 	
 	public void ProcessEnemy()
 	{
-		AnimPlayer.Queue("INITMENU");
+		ProcessBool = true;
+		
+		if (EPokemon.HP > 0)
+		{
+			List<Move> ViableMoves = new List<Move>();
+			
+			bool CheckWeakness = true;
+			bool CheckImmunity = true;
+			bool UseStruggle = false;
+			
+			string Name = Pokemon.PokeNames[EPSprite.Frame];
+			
+			LoopLabel:
+			for (int i = 0; i < EPokemon.Moveset.Count; i++)
+			{
+				Move a = EPokemon.Moveset[i];
+				
+				if (a.CurrentCount > 0)
+					if (!CheckWeakness || !Move.Weaknesses[a.Type].Contains(PPokemon.Type))
+						if (!CheckImmunity || !Move.Immunities[PPokemon.Type].Contains(a.Type))
+							ViableMoves.Add(a);
+			}
+			
+			if (ViableMoves.Count == 0)
+			{
+				if (CheckWeakness)
+				{
+					CheckWeakness = false;
+					goto LoopLabel;
+				}
+				
+				else if (CheckImmunity)
+				{
+					CheckImmunity = false;
+					goto LoopLabel;
+				}
+				
+				else
+					UseStruggle = true;
+			}
+			
+			if (UseStruggle)
+			{
+				byte Damage = (byte)(Math.Floor((double)Math.Floor((double)Math.Floor((double)(2 * EPokemon.Level / 5 + 2)) * EPokemon.Stats[1] * 50 / PPokemon.Stats[2]) / 50) + 2);
+				byte Recoil = (byte)(Damage / 2);
+				
+				int PHP = PPokemon.HP - Damage;
+				int EHP = EPokemon.HP - Recoil;
+				
+				PHP = PHP < 0 ? 0 : PHP;
+				EHP = EHP < 0 ? 0 : EHP;
+				
+				var ESTRUGGLE = AnimPlayer.GetAnimation("ESTRUGGLE");
+				
+				ESTRUGGLE.TrackInsertKey(0, 1, string.Format("Foe {0} is out of usable moves.", Name));
+				ESTRUGGLE.TrackInsertKey(0, 1.69F, string.Format("Foe {0} is out of usable moves.", Name));
+				
+				ESTRUGGLE.TrackInsertKey(0, 2.5F, string.Format("Foe {0} used STRUGGLE!", Name));
+				ESTRUGGLE.TrackInsertKey(0, 4.99F, string.Format("Foe {0} used STRUGGLE!", Name));
+				
+				ESTRUGGLE.TrackInsertKey(0, 8, string.Format("Foe {0} is hurt by recoil.", Name));
+				
+				ESTRUGGLE.TrackInsertKey(3, 3.5F, ((float)PPokemon.HP / (float)PPokemon.Stats[0]) * 100F);
+				ESTRUGGLE.TrackInsertKey(3, 4.5F, ((float)PHP / (float)PPokemon.Stats[0]) * 100F);
+				ESTRUGGLE.TrackInsertKey(5, 4.5F, string.Format("[right]{0}/{1}[/right]", PHP, PPokemon.Stats[0]));
+				
+				ESTRUGGLE.TrackInsertKey(4, 5, ((float)EPokemon.HP / (float)EPokemon.Stats[0]) * 100F);
+				ESTRUGGLE.TrackInsertKey(4, 6, ((float)EHP / (float)EPokemon.Stats[0]) * 100F);
+				
+				EPokemon.HP = (byte)EHP;
+				PPokemon.HP = (byte)PHP;
+				
+				AnimPlayer.Play("ESTRUGGLE");
+			}
+			
+			else
+			{
+				Random RNGEngine = new Random();
+				
+				int Idx = RNGEngine.Next(0, ViableMoves.Count);
+				int Acc = RNGEngine.Next(0, 101);
+				
+				Move UsedMove = ViableMoves[Idx];
+				string MoveName = Pokemon.MoveNames[UsedMove.ID];
+				
+				byte Damage = (byte)(Math.Floor((double)Math.Floor((double)Math.Floor((double)(2 * EPokemon.Level / 5 + 2)) * EPokemon.Stats[1] * UsedMove.Power / PPokemon.Stats[2]) / 50) + 2);
+				UsedMove.CurrentCount -= 1;
+				
+				int PHP = PPokemon.HP - Damage;
+				PHP = PHP < 0 ? 0 : PHP;
+				
+				if (Acc <= UsedMove.Accuracy)
+				{
+					var EATTACK = AnimPlayer.GetAnimation("EATTACK");
+					
+					EATTACK.TrackInsertKey(0, 1, string.Format("Foe {0} used {1}!", Name, MoveName));
+					
+					EATTACK.TrackInsertKey(3, 2, ((float)PPokemon.HP / (float)PPokemon.Stats[0]) * 100F);
+					EATTACK.TrackInsertKey(3, 3F, ((float)PHP / (float)PPokemon.Stats[0]) * 100F);
+					EATTACK.TrackInsertKey(4, 3F, string.Format("[right]{0}/{1}[/right]", PHP, PPokemon.Stats[0]));
+					
+					PPokemon.HP = (byte)PHP;
+					
+					AnimPlayer.Play("EATTACK");
+				}
+				
+				else
+				{
+					var MISS = AnimPlayer.GetAnimation("MISS");
+					
+					MISS.TrackInsertKey(0, 1, string.Format("Foe {0} used {1}!", Name, MoveName));
+					MISS.TrackInsertKey(0, 1.5F, string.Format("Foe {0} used {1}!", Name, MoveName));
+					MISS.TrackInsertKey(0, 2.5F, string.Format("Foe {0}'s attack missed!", Name, MoveName));
+					
+					AnimPlayer.Play("MISS");
+				}
+			}
+			
+			if (Processing == 3)
+				Processing = 2;
+			
+			else
+			{
+				Processing = 0;
+				AnimPlayer.Queue("INITMENU");
+			}
+		}
+		
+		else
+		{
+			Processing = 0;
+			AnimPlayer.Queue("INITMENU");
+		}
+		
+		ProcessBool = false;
+	}
+	
+	public void ProcessPlayer(int Idx)
+	{
+		ProcessBool = true;
+		
+		string Name = Pokemon.PokeNames[PPSprite.Frame];
+		
+		if (PPokemon.HP > 0)
+		{
+			if (Idx == -1)
+			{
+				byte Damage = (byte)(Math.Floor((double)Math.Floor((double)Math.Floor((double)(2 * PPokemon.Level / 5 + 2)) * PPokemon.Stats[1] * 50 / EPokemon.Stats[2]) / 50) + 2);
+				byte Recoil = (byte)(Damage / 2);
+				
+				int PHP = PPokemon.HP - Damage;
+				int EHP = EPokemon.HP - Recoil;
+				
+				PHP = PHP < 0 ? 0 : PHP;
+				EHP = EHP < 0 ? 0 : EHP;
+				
+				var PSTRUGGLE = AnimPlayer.GetAnimation("PSTRUGGLE");
+				
+				PSTRUGGLE.TrackInsertKey(0, 1, string.Format("{0} is out of usable moves.", Name));
+				PSTRUGGLE.TrackInsertKey(0, 1.69F, string.Format("{0} is out of usable moves.", Name));
+				
+				PSTRUGGLE.TrackInsertKey(0, 2.5F, string.Format("{0} used STRUGGLE!", Name));
+				PSTRUGGLE.TrackInsertKey(0, 4.99F, string.Format("{0} used STRUGGLE!", Name));
+				
+				PSTRUGGLE.TrackInsertKey(0, 8, string.Format("{0} is hurt by recoil.", Name));
+				
+				PSTRUGGLE.TrackInsertKey(2, 5F, ((float)PPokemon.HP / (float)PPokemon.Stats[0]) * 100F);
+				PSTRUGGLE.TrackInsertKey(2, 6F, ((float)PHP / (float)PPokemon.Stats[0]) * 100F);
+				PSTRUGGLE.TrackInsertKey(2, 6F, string.Format("[right]{0}/{1}[/right]", PHP, PPokemon.Stats[0]));
+				
+				PSTRUGGLE.TrackInsertKey(3, 3.5F, ((float)EPokemon.HP / (float)EPokemon.Stats[0]) * 100F);
+				PSTRUGGLE.TrackInsertKey(3, 4.5F, ((float)EHP / (float)EPokemon.Stats[0]) * 100F);
+				
+				EPokemon.HP = (byte)EHP;
+				PPokemon.HP = (byte)PHP;
+				
+				AnimPlayer.Play("PSTRUGGLE");
+			}
+			
+			else
+			{
+				Random RNGEngine = new Random();
+				
+				Move UsedMove = PPokemon.Moveset[Idx];
+				int Acc = RNGEngine.Next(0, 101);
+				
+				string MoveName = Pokemon.MoveNames[UsedMove.ID];
+				
+				byte Damage = (byte)(Math.Floor((double)Math.Floor((double)Math.Floor((double)(2 * PPokemon.Level / 5 + 2)) * PPokemon.Stats[1] * UsedMove.Power / EPokemon.Stats[2]) / 50) + 2);
+				UsedMove.CurrentCount -= 1;
+				
+				int EHP = EPokemon.HP - Damage;
+				EHP = EHP < 0 ? 0 : EHP;
+				
+				if (Acc <= UsedMove.Accuracy)
+				{
+					var PATTACK = AnimPlayer.GetAnimation("PATTACK");
+					
+					PATTACK.TrackInsertKey(0, 1, string.Format("{0} used {1}!", Name, MoveName));
+					
+					PATTACK.TrackInsertKey(2, 2, ((float)EPokemon.HP / (float)EPokemon.Stats[0]) * 100F);
+					PATTACK.TrackInsertKey(2, 3F, ((float)EHP / (float)EPokemon.Stats[0]) * 100F);
+					
+					EPokemon.HP = (byte)EHP;
+					
+					AnimPlayer.Play("PATTACK");
+				}
+				
+				else
+				{
+					var MISS = AnimPlayer.GetAnimation("MISS");
+					
+					MISS.TrackInsertKey(0, 1, string.Format("{0} used {1}!", Name, MoveName));
+					MISS.TrackInsertKey(0, 1.5F, string.Format("{0} used {1}!", Name, MoveName));
+					MISS.TrackInsertKey(0, 2.5F, string.Format("{0}'s attack missed!", Name, MoveName));
+					
+					AnimPlayer.Play("MISS");
+				}
+			}
+			
+			if (Processing == 4)
+				Processing = 1;
+			
+			else
+			{
+				Processing = 0;
+				AnimPlayer.Queue("INITMENU");
+			}
+		}
+		
+		else
+		{
+			Processing = 0;
+			AnimPlayer.Queue("INITMENU");
+		}
+		
+		ProcessBool = false;
 	}
 	
 	public override void _Ready()
@@ -294,5 +553,11 @@ public class BTLSCENE : Node2D
 		
 		if (PCalling && AnimPlayer.CurrentAnimation == "PSEND")
 			InitPlayer();
+			
+		if ((Processing == 3 || Processing == 1) && !ProcessBool && !AnimPlayer.IsPlaying())
+			ProcessEnemy();
+			
+		else if ((Processing == 4 || Processing == 2)  && !ProcessBool && !AnimPlayer.IsPlaying())
+			ProcessPlayer(PAttackIndex);
 	}
 }

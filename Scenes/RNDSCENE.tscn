@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Assets/FRAME.png" type="Texture" id=1]
 [ext_resource path="res://Assets/HUDTEXT.png" type="Texture" id=2]
 [ext_resource path="res://Assets/PokeFont.tres" type="DynamicFont" id=3]
 [ext_resource path="res://Scripts/RNDSCENE.cs" type="Script" id=4]
+[ext_resource path="res://Assets/BATTLE.wav" type="AudioStream" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -250,4 +251,5 @@ anims/INIT = SubResource( 9 )
 anims/TRNS = SubResource( 10 )
 
 [node name="MUSIC" type="AudioStreamPlayer" parent="ENGINES"]
+stream = ExtResource( 5 )
 volume_db = -15.0

@@ -5,15 +5,16 @@ using System.Collections.Generic;
 
 public class Pokemon
 {
-	static Move TACKLE = new Move(0, 0x0A, 35, 40, 100, 0);
-	static Move POUND = new Move(1, 0x0A, 50, 40, 100, 0);
+	Move TACKLE = new Move(0, 0x0A, 40, 40, 100, 0);
+	Move POUND = new Move(1, 0x0A, 40, 40, 100, 0);
 	
-	public List<Move> Moveset = new List<Move> { TACKLE, POUND };
+	public List<Move> Moveset;
 	public List<byte> IVArray;
 	public List<byte> Stats;
 	public byte Level;
 	public byte Species;
 	public byte HP;
+	public byte Type;
 	
 	public static string[] TypeNames = new string[]
 	{
@@ -105,5 +106,7 @@ public class Pokemon
 		
 		CalcStats();
 		CalcHP();
+		
+		Moveset = new List<Move> { TACKLE, POUND };
 	}
 }
