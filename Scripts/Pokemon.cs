@@ -13,7 +13,7 @@ public class Pokemon
 	public List<byte> Stats;
 	public byte Level;
 	public byte Species;
-	public byte HP;
+	public byte Health;
 	public byte Type;
 	
 	public static string[] TypeNames = new string[]
@@ -96,7 +96,7 @@ public class Pokemon
 		byte StatCalc = (byte)Math.Floor((double)((2 * BaseStats[0] + IVArray[0]) * Level / 100 + Level + 10));
 		Stats[0] = StatCalc;
 		
-		HP = StatCalc;
+		Health = StatCalc;
 	}
 	
 	public Pokemon(byte L, byte S)
