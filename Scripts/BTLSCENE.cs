@@ -178,7 +178,7 @@ public class BTLSCENE : Node2D
 				Menu[1].Visible = false;
 				Menu[2].Visible = true;
 
-				// Battle[0].Hovered = true;
+				InfoLoop();
 			}
 			
 			if (Action[1].Pressed)
@@ -233,6 +233,8 @@ public class BTLSCENE : Node2D
 	{
 		if (Menu[2].Visible)
 		{
+			int PassCount = 0;
+			
 			for (byte i = 0; i < Battle.Count; i++)
 			{
 				if (Battle[i].IsHovered() && !Battle[i].Disabled)
@@ -242,7 +244,7 @@ public class BTLSCENE : Node2D
 					
 					else
 					{
-						Move HMove = LPokemon[0].Moveset[i];
+						Move HMove = LPokemon[1].Moveset[i];
 						PastSelection = i;
 						
 						RichTextLabel TypeLabel = Menu[2].GetNode("INFBOX/TEXT/TYPE") as RichTextLabel;
@@ -254,6 +256,21 @@ public class BTLSCENE : Node2D
 						break;
 					}
 				}
+				
+				else
+					PassCount++;
+			}
+			
+			if (PassCount == Battle.Count)
+			{
+				Move HMove = LPokemon[1].Moveset[0];
+				PastSelection = 0;
+				
+				RichTextLabel TypeLabel = Menu[2].GetNode("INFBOX/TEXT/TYPE") as RichTextLabel;
+				RichTextLabel CountLabel = Menu[2].GetNode("INFBOX/TEXT/COUNT") as RichTextLabel;
+				
+				TypeLabel.BbcodeText = string.Format("[center]{0}[/center]", Pokemon.TypeNames[HMove.Type]);
+				CountLabel.BbcodeText = string.Format("[right]{0}/{1}[/right]", HMove.CurrentCount, HMove.Count);
 			}
 		}
 	}
